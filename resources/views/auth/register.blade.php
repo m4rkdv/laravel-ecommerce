@@ -45,7 +45,7 @@
                 <input id="mobile" type="mobile" class="form-control form-control_gray @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required=""
                   autocomplete="mobile">
                 <label for="mobile">Mobile</label>
-                @error('email')
+                @error('mobile')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
