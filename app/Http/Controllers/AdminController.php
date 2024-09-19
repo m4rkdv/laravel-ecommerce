@@ -86,15 +86,16 @@ class AdminController extends Controller
         $image = $request->file('image');
         $file_extension = $request->file('image')->extension();
         $file_name = Carbon::now()->timestamp.'.'.$file_extension;
-        $this->GenBrandThumbnailsImage($image,$file_name);
+        $this->GenThumbnailsImage($image,$file_name,'brands');
         $brand->image = $file_name;
         $brand->save();
         return redirect()->route('admin.brands')->with('status','Brand has been added succesfully!');
     }
 
-    public function GenBrandThumbnailsImage($image,$image_name)
+    public function GenThumbnailsImage($image,$image_name,$type)
     {
-        $destinationPath = public_path('uploads/brands');
+        
+        $destinationPath = public_path('uploads/'.$type);
         $img = Image::read($image->path());
         $img->cover(124,124,"top");
         $img->resize(124,124,function($constraint){
@@ -106,5 +107,30 @@ class AdminController extends Controller
     {
         $categories=Category::orderBy('id','DESC')->paginate(10);
         return view('admin.categories',compact('categories'));
+    }
+
+    public function add_category()
+    {
+        return view('admin.category-add');
+    }
+
+    public function category_store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:categories,slug',
+            'image' => 'mimes:png,jpg,jpeg|max:2048'
+        ]);
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+        $image = $request->file('image');
+        $file_extension = $request->file('image')->extension();
+        $file_name = Carbon::now()->timestamp.'.'.$file_extension;
+        $this->GenThumbnailsImage($image,$file_name,'categories');
+        $category->image = $file_name;
+        $category->save();
+        return redirect()->route('admin.categories')->with('status','Category has been added succesfully!');
     }
 }
