@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -99,5 +100,11 @@ class AdminController extends Controller
         $img->resize(124,124,function($constraint){
             $constraint->aspectRatio();
         })->save($destinationPath.'/'.$image_name);
+    }
+
+    public function categories()
+    {
+        $categories=Category::orderBy('id','DESC')->paginate(10);
+        return view('admin.categories',compact('categories'));
     }
 }

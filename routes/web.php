@@ -17,10 +17,13 @@ Route::middleware(['auth'])->group(function(){
 
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
     Route::get('/admin/brands', [AdminController::class, 'brands'])->name('admin.brands');
     Route::get('/admin/brands/add', [AdminController::class, 'add_brands'])->name('admin.brand.add');
     Route::post('/admin/brands/store', [AdminController::class, 'brand_store'])->name('admin.brand.store');
     Route::get('/admin/brands/edit/{id}', [AdminController::class, 'edit_brand'])->name('admin.brand.edit');
     Route::put('/admin/brands/update', [AdminController::class, 'brand_update'])->name('admin.brand.update');
     Route::delete('/admin/brands/{id}/delete', [AdminController::class, 'delete_brand'])->name('admin.brand.delete');
+
+    Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
 });
