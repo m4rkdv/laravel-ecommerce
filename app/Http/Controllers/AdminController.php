@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Laravel\Facades\Image;
 
 class AdminController extends Controller
@@ -180,5 +181,11 @@ class AdminController extends Controller
         }
         $category->delete();
         return redirect()->route('admin.categories')->with('status','Category has been deleted succesfully ');
+    }
+
+    public function products()
+    {
+        $products= Product::orderBy('created_at','DESC')->paginate(10);
+        return view('admin.products',compact('products'));
     }
 }
