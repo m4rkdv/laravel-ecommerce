@@ -31,6 +31,7 @@
             <form class="tf-section-2 form-add-product" method="POST" enctype="multipart/form-data"
                 action="{{ route('admin.products.update') }}">
                 @csrf
+                <input type="hidden" name="id" value="{{ $product->id }}" />
                 @method('PUT')
                 <div class="wg-box">
                         <fieldset class="name">
@@ -133,7 +134,7 @@
                                 @if($product->images)
                                     @foreach (explode(',',$product->images) as $img)
                                         <div class="item gitems">
-                                            <img src="{{ asset('uploads/products') }}/{{ trim($img) }}" alt="{{$product->name}}">
+                                            <img src="{{ asset('uploads/products/thumbnails') }}/{{ trim($img) }}" alt="{{$product->name}}">
                                         </div>
                                     @endforeach
                                 @endif                                               

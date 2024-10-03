@@ -36,7 +36,7 @@ class AdminController extends Controller
     public function brand_update(Request $request){
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:brands,slug,'.$request->id,
+            'slug' => 'required|unique:brands,slug,'. $request->id,
             'image' => 'mimes:png,jpg,jpeg|max:2048'
         ]);
 
@@ -146,7 +146,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:categories,slug,'.$request->id,
+            'slug' => 'required|unique:categories,slug,'. $request->id . ',id',
             'image' => 'mimes:png,jpg,jpeg|max:2048'
         ]);
 
@@ -292,7 +292,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' =>'required',
-            'slug' =>'required|unique:products,slug',
+            'slug' => 'required|unique:products,slug,' . $request->id . ',id',
             'short_description' =>'required',
             'description' =>'required',
             'regular_price' =>'required',
@@ -301,12 +301,12 @@ class AdminController extends Controller
             'stock_status' =>'required',
             'featured' =>'required',
             'quantity' =>'required',
-            'image' =>'required|mimes:png,jpg,jpeg|max:2048',
+            'image' =>'nullable|mimes:png,jpg,jpeg|max:2048',
             'category_id' =>'required',
             'brand_id' =>'required'
         ]);
 
-        $product = new Product();
+        $product = Product::find($request->id);
         $product->name = $request->name;
         $product->slug = Str::slug($request->name);
         $product->short_description = $request->short_description;
@@ -322,6 +322,14 @@ class AdminController extends Controller
 
         if ($request->hasFile('image'))
         {
+            if (File::exists(public_path('uploads/products').'/'.$product->image))
+            {
+                File::delete(public_path('uploads/products').'/'.$product->image);
+            }
+            if (File::exists(public_path('uploads/products/thumbnails').'/'.$product->image))
+            {
+                File::delete(public_path('uploads/products/thumbnails').'/'.$product->image);
+            }
             $image = $request->file('image');
             $file_name = Carbon::now()->timestamp.'.'.$image->extension();
             $this->GenProductImages($image,$file_name);
@@ -333,6 +341,17 @@ class AdminController extends Controller
         $cont=1;
         if ($request->hasFile('images'))
         {
+            foreach(explode(',',$product->images) as $oFile)
+            {
+                if (File::exists(public_path('uploads/products').'/'.$oFile))
+                {
+                    File::delete(public_path('uploads/products').'/'.$oFile);
+                }
+                if (File::exists(public_path('uploads/products/thumbnails').'/'.$oFile))
+                {
+                    File::delete(public_path('uploads/products/thumbnails').'/'.$oFile);
+                }
+            }
             $allowedFileExtension=['jpg','png','jpeg'];
             $files = $request->file('images');
             foreach($files as $file)
@@ -347,11 +366,10 @@ class AdminController extends Controller
                     $cont++;
                 }
                 $gallery_images = implode(',',$gallery_arr);
+                $product->images = $gallery_images;
             }
-        }
-        $product->images = $gallery_images;
-       
+        }       
         $product->save();
-        return redirect()->route('admin.products')->with('status','Product has been added succesfully!');
+        return redirect()->route('admin.products')->with('status','Product has been updated succesfully!');
     }
 }
