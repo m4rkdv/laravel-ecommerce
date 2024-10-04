@@ -372,4 +372,32 @@ class AdminController extends Controller
         $product->save();
         return redirect()->route('admin.products')->with('status','Product has been updated succesfully!');
     }
+
+    public function product_delete($id)
+    {
+        $product = Product::find($id);
+        if (File::exists(public_path('uploads/products').'/'.$product->image))
+        {
+            File::delete(public_path('uploads/products').'/'.$product->image);
+        }
+        if (File::exists(public_path('uploads/products/thumbnails').'/'.$product->image))
+        {
+            File::delete(public_path('uploads/products/thumbnails').'/'.$product->image);
+        }
+
+        foreach(explode(',',$product->images) as $oFile)
+        {
+            if (File::exists(public_path('uploads/products').'/'.$oFile))
+            {
+                File::delete(public_path('uploads/products').'/'.$oFile);
+            }
+            if (File::exists(public_path('uploads/products/thumbnails').'/'.$oFile))
+            {
+                File::delete(public_path('uploads/products/thumbnails').'/'.$oFile);
+            }
+        }
+
+        $product->delete();
+        return redirect()->route('admin.products')->with('status','Product has been deleted successfully!');
+    }
 }

@@ -38,7 +38,12 @@
                 </div>
                 <div class="table-responsive">
                     @if(Session::has('status'))
-                        <p class="alert alert-success">{{Session::get('status')}}</p>
+                        @php
+                            $statusMessage = Session::get('status');
+                            $alertClass = str_contains($statusMessage, 'deleted') ? 'alert-danger' : 'alert-success';
+                        @endphp
+
+                        <p class="alert {{ $alertClass }}">{{ $statusMessage }}</p>
                     @endif
                     <table class="table table-striped table-bordered">
                         <thead>
@@ -89,7 +94,9 @@
                                                 <i class="icon-edit-3"></i>
                                             </div>
                                         </a>
-                                        <form action="#" method="POST">
+                                        <form action="{{ route('admin.products.delete',['id'=>$product->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
                                             <div class="item text-danger delete">
                                                 <i class="icon-trash-2"></i>
                                             </div>
@@ -112,3 +119,24 @@
     </div>
 
 @endsection
+@push('scripts')
+    <script>
+        $(function()
+        {
+            $('.delete').on('click',function(e)
+            {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                swal({
+                    title:"Are you sure?",
+                    text:"You want to delete this Product?",
+                    type:"warning",
+                    buttons:["No","Yes"],
+                    confirmButtonColor:"#dc3545"
+                }).then(function(result){
+                    if (result){form.submit();} 
+                });
+            });
+        })
+    </script>
+@endpush

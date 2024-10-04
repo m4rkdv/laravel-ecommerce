@@ -38,8 +38,13 @@
                 </div>
                 <div class="wg-table table-all-user">
                     <div class="table-responsive">
-                        @if (Session::has('status'))
-                            <p class="alert alert-success">{{Session::get('status')}}</p>
+                        @if(Session::has('status'))
+                            @php
+                                $statusMessage = Session::get('status');
+                                $alertClass = str_contains($statusMessage, 'deleted') ? 'alert-danger' : 'alert-success';
+                            @endphp
+
+                            <p class="alert {{ $alertClass }}">{{ $statusMessage }}</p>
                         @endif
                         <table class="table table-striped table-bordered">
                             <thead>
