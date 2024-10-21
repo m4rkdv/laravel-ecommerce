@@ -69,7 +69,7 @@
                             </div>
                             </td>
                             <td>
-                            <span class="shopping-cart__subtotal">$297</span>
+                            <span class="shopping-cart__subtotal">${{ $item->subTotal() }}</span>
                             </td>
                             <td>
                             <a href="#" class="remove-cart">
@@ -100,7 +100,7 @@
                     <tbody>
                     <tr>
                         <th>Subtotal</th>
-                        <td>$1300</td>
+                        <td>${{ Cart::instance('cart')->subtotal() }}</td>
                     </tr>
                     <tr>
                         <th>Shipping</th>
@@ -126,12 +126,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>VAT</th>
-                        <td>$19</td>
-                    </tr>
-                    <tr>
                         <th>Total</th>
-                        <td>$1319</td>
+                        <td>${{ Cart::instance('cart')->total() }}</td>
                     </tr>
                     </tbody>
                 </table>
