@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
