@@ -416,12 +416,21 @@ class AdminController extends Controller
     public function store_coupon(Request $request)
     {
         $request->validate([
-            'code' => 'required',
-            'type' => 'required',
-            'value' => 'required|numeric',
-            'cart_value' => 'required|numeric',
-            'expiry_date' => 'required|date'
-        ]);
+            'code' => 'required|unique:coupons|max:10',
+            'type' => 'required|in:fixed,percent',
+            'value' => 'required|numeric|min:1',
+            'cart_value' => 'required|numeric|min:1',
+            'expiry_date' => 'required|date|after:today',
+        ], [
+            'code.required' => 'El código del cupón es obligatorio.',
+            'code.unique' => 'Este código de cupón ya existe.',
+            'type.required' => 'El tipo de cupón es obligatorio.',
+            'value.required' => 'El valor del cupón es obligatorio.',
+            'value.numeric' => 'El valor del cupón debe ser un número.',
+            'cart_value.required' => 'El valor mínimo del carrito es obligatorio.',
+            'cart_value.numeric' => 'El valor del carrito debe ser un número.',
+            'expiry_date.after' => 'La fecha de expiración debe ser futura.',
+        ]);        
 
         $coupon = new Coupon();
         $coupon->code = $request->code;
