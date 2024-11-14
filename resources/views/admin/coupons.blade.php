@@ -70,7 +70,7 @@
                                     <td>{{ $coupon->expiry_date }}</td>
                                     <td>
                                         <div class="list-icon-function">
-                                            <a href="#">
+                                            <a href="{{ route('admin.coupons.edit',['id'=>$coupon->id]) }}">
                                                 <div class="item edit">
                                                     <i class="icon-edit-3"></i>
                                                 </div>

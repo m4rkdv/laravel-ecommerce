@@ -441,6 +441,41 @@ class AdminController extends Controller
         $coupon->save();
 
         return redirect()->route('admin.coupons')->with('status','Coupon has been added successfully!');
+    }
 
+    public function edit_coupon($id)
+    {
+        $coupon = Coupon::find($id);
+        return view('admin.edit-coupon',compact('coupon'));
+    }
+
+    public function update_coupon(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|unique:coupons,code,' . $request->id . ',id|max:10',
+            'type' => 'required|in:fixed,percent',
+            'value' => 'required|numeric|min:1',
+            'cart_value' => 'required|numeric|min:1',
+            'expiry_date' => 'required|date|after:today',
+        ], [
+            'code.required' => 'El código del cupón es obligatorio.',
+            'code.unique' => 'Este código de cupón ya existe.',
+            'type.required' => 'El tipo de cupón es obligatorio.',
+            'value.required' => 'El valor del cupón es obligatorio.',
+            'value.numeric' => 'El valor del cupón debe ser un número.',
+            'cart_value.required' => 'El valor mínimo del carrito es obligatorio.',
+            'cart_value.numeric' => 'El valor del carrito debe ser un número.',
+            'expiry_date.after' => 'La fecha de expiración debe ser futura.',
+        ]);        
+
+        $coupon = Coupon::find($request->id);
+        $coupon->code = $request->code;
+        $coupon->type = $request->type;
+        $coupon->value = $request->value;
+        $coupon->cart_value = $request->cart_value;
+        $coupon->expiry_date = $request->expiry_date;
+        $coupon->save();
+
+        return redirect()->route('admin.coupons')->with('status','Coupon has been updated successfully!');
     }
 }
