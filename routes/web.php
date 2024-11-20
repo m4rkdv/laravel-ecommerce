@@ -22,6 +22,8 @@ Route::put('cart/decrease-qty/{rowId}',[CartController::class,'decrease_cart_qua
 Route::delete('cart/remove/{rowId}',[CartController::class,'remove_item'])->name('cart.remove');
 Route::delete('cart/clear',[CartController::class,'empty_cart'])->name('cart.destroy');
 
+Route::post('cart/apply-coupon',[CartController::class,'apply_coupon_code'])->name('cart.coupon.apply');
+
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
 });
