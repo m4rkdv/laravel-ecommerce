@@ -23,6 +23,7 @@ Route::delete('cart/remove/{rowId}',[CartController::class,'remove_item'])->name
 Route::delete('cart/clear',[CartController::class,'empty_cart'])->name('cart.destroy');
 
 Route::post('cart/apply-coupon',[CartController::class,'apply_coupon_code'])->name('cart.coupon.apply');
+Route::delete('cart/remove-coupon',[CartController::class,'remove_coupon'])->name('cart.coupon.remove');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
