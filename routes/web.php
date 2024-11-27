@@ -25,6 +25,8 @@ Route::delete('cart/clear',[CartController::class,'empty_cart'])->name('cart.des
 Route::post('cart/apply-coupon',[CartController::class,'apply_coupon_code'])->name('cart.coupon.apply');
 Route::delete('cart/remove-coupon',[CartController::class,'remove_coupon'])->name('cart.coupon.remove');
 
+Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
+
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
 });
