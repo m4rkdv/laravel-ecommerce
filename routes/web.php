@@ -15,17 +15,19 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop',[ShopController::class,'index'])->name('shop.index');
 Route::get('/shop/{product_slug}',[ShopController::class,'product_details'])->name('shop.products.details');
 
-Route::get('/cart',[CartController::class,'index'])->name('cart.index');
-Route::post('/cart/add',[CartController::class,'add_to_cart'])->name('cart.add');
-Route::put('cart/increase-qty/{rowId}',[CartController::class,'increase_cart_quantity'])->name('cart.qty.increase');
-Route::put('cart/decrease-qty/{rowId}',[CartController::class,'decrease_cart_quantity'])->name('cart.qty.decrease');
-Route::delete('cart/remove/{rowId}',[CartController::class,'remove_item'])->name('cart.remove');
-Route::delete('cart/clear',[CartController::class,'empty_cart'])->name('cart.destroy');
+Route::get('/carrito',[CartController::class,'index'])->name('cart.index');
+Route::post('/carrito/add',[CartController::class,'add_to_cart'])->name('cart.add');
+Route::put('/carrito/increase-qty/{rowId}',[CartController::class,'increase_cart_quantity'])->name('cart.qty.increase');
+Route::put('/carrito/decrease-qty/{rowId}',[CartController::class,'decrease_cart_quantity'])->name('cart.qty.decrease');
+Route::delete('/carrito/remove/{rowId}',[CartController::class,'remove_item'])->name('cart.remove');
+Route::delete('/carrito/clear',[CartController::class,'empty_cart'])->name('cart.destroy');
 
-Route::post('cart/apply-coupon',[CartController::class,'apply_coupon_code'])->name('cart.coupon.apply');
-Route::delete('cart/remove-coupon',[CartController::class,'remove_coupon'])->name('cart.coupon.remove');
+Route::post('/carrito/aplicar-coupon',[CartController::class,'apply_coupon_code'])->name('cart.coupon.apply');
+Route::delete('/carrito/quitar-coupon',[CartController::class,'remove_coupon'])->name('cart.coupon.remove');
 
 Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
+Route::post('/realizar-pedido',[CartController::class,'place_an_order'])->name('cart.place.order');
+Route::get('/confirmar-pedido',[CartController::class,'order_confirmation'])->name('cart.confirmation');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');

@@ -9,6 +9,11 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $attributes = [
+        'canceled_date' => null, 
+    ];
+    
+
     public function user()
     {
         return $this->belongsTo(User::class);

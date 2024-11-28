@@ -27,7 +27,8 @@
           </span>
         </a>
       </div>
-      <form name="checkout-form" action="">
+      <form name="checkout-form" action="{{ route('cart.place.order') }}" method="POST">
+        @csrf
         <div class="checkout-form">
           <div class="billing-info__wrapper">
             <div class="row">
@@ -203,52 +204,30 @@
                 @endif
               </div>
               <div class="checkout__payment-methods">
+
+                  <div class="form-check">
+                    <input class="form-check-input form-check-input_fill" type="radio" name="mode"
+                      id="mode1" value="mercadopago" checked>
+                    <label class="form-check-label" for="mode1">
+                      Mercado Pago
+                      <p class="option-detail">
+                        Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
+                        aliquam varius ipsum.
+                      </p>
+                    </label>
+                  </div>
+
                 <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_1" checked>
-                  <label class="form-check-label" for="checkout_payment_method_1">
+                  <input class="form-check-input form-check-input_fill" type="radio" name="mode"
+                    id="mode2" value="card">
+                  <label class="form-check-label" for="mode2">
                     Transferencia Bancaria Directa
                     <p class="option-detail">
                         Realizá el pago directamente en nuestra cuenta bancaria. Usá tu ID de Pedido como referencia de pago. El pedido no será enviado hasta que los fondos se acrediten en nuestra cuenta.
                     </p>
                   </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_2">
-                  <label class="form-check-label" for="checkout_payment_method_2">
-                    Check payments
-                    <p class="option-detail">
-                      Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                      aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                      magna posuere eget.
-                    </p>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_3">
-                  <label class="form-check-label" for="checkout_payment_method_3">
-                    Cash on delivery
-                    <p class="option-detail">
-                      Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                      aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                      magna posuere eget.
-                    </p>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_4">
-                  <label class="form-check-label" for="checkout_payment_method_4">
-                    Paypal
-                    <p class="option-detail">
-                      Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                      aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                      magna posuere eget.
-                    </p>
-                  </label>
-                </div>
+
                 <div class="policy-text">
                     Tus datos personales serán utilizados para procesar tu pedido, mejorar tu experiencia en esta tienda, y para otros propósitos descritos en nuestra <a href="terms.html" target="_blank">política de privacidad</a>.
                 </div>
