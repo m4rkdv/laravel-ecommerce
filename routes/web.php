@@ -27,7 +27,7 @@ Route::delete('/carrito/quitar-coupon',[CartController::class,'remove_coupon'])-
 
 Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
 Route::post('/realizar-pedido',[CartController::class,'place_an_order'])->name('cart.place.order');
-Route::get('/confirmar-pedido',[CartController::class,'order_confirmation'])->name('cart.confirmation');
+Route::get('/pedido-confirmado',[CartController::class,'order_confirmation'])->name('cart.confirmation');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
@@ -36,31 +36,33 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-    Route::get('/admin/brands', [AdminController::class, 'brands'])->name('admin.brands');
-    Route::get('/admin/brands/add', [AdminController::class, 'add_brands'])->name('admin.brand.add');
-    Route::post('/admin/brands/store', [AdminController::class, 'brand_store'])->name('admin.brand.store');
-    Route::get('/admin/brands/edit/{id}', [AdminController::class, 'edit_brand'])->name('admin.brand.edit');
-    Route::put('/admin/brands/update', [AdminController::class, 'brand_update'])->name('admin.brand.update');
-    Route::delete('/admin/brands/{id}/delete', [AdminController::class, 'delete_brand'])->name('admin.brand.delete');
+    Route::get('/admin/marcas', [AdminController::class, 'brands'])->name('admin.brands');
+    Route::get('/admin/marcas/add', [AdminController::class, 'add_brands'])->name('admin.brand.add');
+    Route::post('/admin/marcas/store', [AdminController::class, 'brand_store'])->name('admin.brand.store');
+    Route::get('/admin/marcas/edit/{id}', [AdminController::class, 'edit_brand'])->name('admin.brand.edit');
+    Route::put('/admin/marcas/update', [AdminController::class, 'brand_update'])->name('admin.brand.update');
+    Route::delete('/admin/marcas/{id}/delete', [AdminController::class, 'delete_brand'])->name('admin.brand.delete');
 
-    Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
-    Route::get('/admin/categories/add', [AdminController::class, 'add_category'])->name('admin.categories.add');
-    Route::post('/admin/categories/store', [AdminController::class, 'category_store'])->name('admin.categories.store');
-    Route::get('/admin/categories/edit/{id}', [AdminController::class, 'edit_category'])->name('admin.categories.edit');
-    Route::put('/admin/categories/update', [AdminController::class, 'category_update'])->name('admin.categories.update');
-    Route::delete('/admin/categories/{id}/delete', [AdminController::class, 'category_delete'])->name('admin.categories.delete');
+    Route::get('/admin/categorias', [AdminController::class, 'categories'])->name('admin.categories');
+    Route::get('/admin/categorias/add', [AdminController::class, 'add_category'])->name('admin.categories.add');
+    Route::post('/admin/categorias/store', [AdminController::class, 'category_store'])->name('admin.categories.store');
+    Route::get('/admin/categorias/edit/{id}', [AdminController::class, 'edit_category'])->name('admin.categories.edit');
+    Route::put('/admin/categorias/update', [AdminController::class, 'category_update'])->name('admin.categories.update');
+    Route::delete('/admin/categorias/{id}/delete', [AdminController::class, 'category_delete'])->name('admin.categories.delete');
 
-    Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products');
-    Route::get('/admin/products/add', [AdminController::class, 'add_product'])->name('admin.products.add');
-    Route::post('/admin/products/store', [AdminController::class, 'product_store'])->name('admin.products.store');
-    Route::get('/admin/products/edit/{id}', [AdminController::class, 'product_edit'])->name('admin.products.edit');
-    Route::put('/admin/products/update', [AdminController::class, 'product_update'])->name('admin.products.update');
-    Route::delete('/admin/products/{id}/delete', [AdminController::class, 'product_delete'])->name('admin.products.delete');
+    Route::get('/admin/productos', [AdminController::class, 'products'])->name('admin.products');
+    Route::get('/admin/productos/add', [AdminController::class, 'add_product'])->name('admin.products.add');
+    Route::post('/admin/productos/store', [AdminController::class, 'product_store'])->name('admin.products.store');
+    Route::get('/admin/productos/edit/{id}', [AdminController::class, 'product_edit'])->name('admin.products.edit');
+    Route::put('/admin/productos/update', [AdminController::class, 'product_update'])->name('admin.products.update');
+    Route::delete('/admin/productos/{id}/delete', [AdminController::class, 'product_delete'])->name('admin.products.delete');
 
-    Route::get('/admin/coupons',[AdminController::class,'coupons'])->name('admin.coupons');
-    Route::get('/admin/coupons/add',[AdminController::class,'add_coupon'])->name('admin.coupons.add');
-    Route::post('/admin/coupons/store',[AdminController::class,'store_coupon'])->name('admin.coupons.store');
-    Route::get('/admin/coupons/{id}/edit',[AdminController::class,'edit_coupon'])->name('admin.coupons.edit');
-    Route::put('/admin/coupons/update',[AdminController::class,'update_coupon'])->name('admin.coupons.update');
-    Route::delete('/admin/coupons/{id}/delete',[AdminController::class,'delete_coupon'])->name('admin.coupons.delete');
+    Route::get('/admin/ordenes',[AdminController::class,'orders'])->name('admin.orders');
+
+    Route::get('/admin/cupones',[AdminController::class,'coupons'])->name('admin.coupons');
+    Route::get('/admin/cupones/add',[AdminController::class,'add_coupon'])->name('admin.coupons.add');
+    Route::post('/admin/cupones/store',[AdminController::class,'store_coupon'])->name('admin.coupons.store');
+    Route::get('/admin/cupones/{id}/edit',[AdminController::class,'edit_coupon'])->name('admin.coupons.edit');
+    Route::put('/admin/cupones/update',[AdminController::class,'update_coupon'])->name('admin.coupons.update');
+    Route::delete('/admin/cupones/{id}/delete',[AdminController::class,'delete_coupon'])->name('admin.coupons.delete');
 });
