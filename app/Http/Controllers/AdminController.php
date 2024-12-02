@@ -7,6 +7,8 @@ use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\OrderItem;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -493,4 +495,11 @@ class AdminController extends Controller
         return view('admin.orders',compact('orders'));
     }
     
+    public function order_details($orderId)
+    {
+        $order = Order::find($orderId);
+        $orderItems = OrderItem::where('order_id',$orderId)->orderBy('id')->paginate(12);
+        $transaction = Transaction::where('order_id',$orderId)->first();
+        return view('admin.orders-details',compact('order','orderItems','transaction'));
+    }
 }

@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-
         <div class="main-content-inner">
             <div class="main-content-wrap">
                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
@@ -66,7 +65,7 @@
                                             <td class="text-center">{{ $order->orderItems->count() }}</td>
                                             <td class="text-center">{{ $order->delivered_date }}</td>
                                             <td class="text-center">
-                                                <a href="order-details.html">
+                                                <a href="{{ route('admin.orders.details',['orderId'=>$order->id]) }}">
                                                     <div class="list-icon-function view-icon">
                                                         <div class="item eye">
                                                             <i class="icon-eye"></i>
