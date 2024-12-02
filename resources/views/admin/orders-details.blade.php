@@ -35,32 +35,33 @@
                         <table class="table table-striped table-bordered">
                                 <tr>
                                     <th>Orden Nro</th>
-                                    <td>{{ $order->id }}</td>
                                     <th>Celular</th>
-                                    <td>{{ $order->phone }}</td>
                                     <th>Código Postal</th>
-                                    <td>{{ $order->zip }}</td>
-                                </tr>
-                                <tr>
                                     <th>Fecha del Pedido</th>
-                                    <td>{{ $order->created_at }}</td>
                                     <th>Fecha de Entrega</th>
-                                    <td>{{ $order->delivered_date }}</td>
                                     <th>Fecha de Cancelación</th>
-                                    <td>{{ $order->canceled_date }}</td>
-                                </tr>
-                                <tr>
                                     <th>Estado de la Orden</th>
-                                    <td colspan="5">
-                                        @if ($order->status == 'delivered')
-                                            <span class="badge bg-success">Entregado</span>
-                                        @elseif ($order->status == 'ordered')
-                                            <span class="badge bg-warning">Ordenado</span>
-                                        @else
-                                            <span class="badge bg-danger">Cancelado</span>
-                                        @endif
-                                    </td>
                                 </tr>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $order->id }}</td>
+                                        <td>{{ $order->phone }}</td>
+                                        <td>{{ $order->zip }}</td>
+                                        <td>{{ $order->created_at }}</td>
+                                        <td>{{ $order->delivered_date }}</td>
+                                        <td>{{ $order->canceled_date }}</td>
+                                        <td>
+                                            @if ($order->status == 'delivered')
+                                            <span class="badge bg-success">Entregado</span>
+                                            @elseif ($order->status == 'ordered')
+                                            <span class="badge bg-warning">Ordenado</span>
+                                            @else
+                                            <span class="badge bg-danger">Cancelado</span>
+                                            @endif
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
                         </table>
                     </div>
                 </div>
@@ -143,19 +144,32 @@
                 <div class="wg-box mt-5">
                     <h5>Transacciones</h5>
                     <table class="table table-striped table-bordered table-transaction">
-                        <tbody>
+                        <thead>
                             <tr>
                                 <th>Subtotal</th>
-                                <td>${{ $order->subtotal }}</td>
+                               
                                 <th>Descuento</th>
-                                <td>${{ $order->discount }}</td>
-                            </tr>
-                            <tr>
+                               
                                 <th>Total</th>
-                                <td>${{ $order->total }}</td>
+                                
                                 <th>Método de Pago</th>
-                                <td>{{ $transaction->mode }}</td>
+                                
                                 <th>Estado</th>
+                                
+                                <th>Fecha del Pedido</th>
+                               
+                                <th>Fecha de Entrega</th>
+                                
+                                <th>Fecha de Cancelación</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${{ $order->subtotal }}</td>
+                                <td>${{ $order->discount }}</td>
+                                <td>${{ $order->total }}</td>
+                                <td>{{ $transaction->mode }}</td>
                                 <td>
                                     @if ($transaction->status == 'approved')
                                         <span class="badge bg-success">Aprobado</span>                                        
@@ -167,14 +181,9 @@
                                         <span class="badge bg-warning">Pendiente</span>
                                     @endif
                                 </td>
-                            </tr>
-                            <tr>
-                                <th>Fecha del Pedido</th>
-                                <td>2024-07-11 00:54:14</td>
-                                <th>Fecha de Entrega</th>
-                                <td></td>
-                                <th>Fecha de Cancelación</th>
-                                <td></td>
+                                <td>{{ $order->created_at }}</td>
+                                <td>{{ $order->delivered_date }}</td>
+                                <td>{{ $order->canceled_date }}</td>
                             </tr>
                         </tbody>
                     </table>
