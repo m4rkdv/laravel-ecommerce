@@ -31,7 +31,8 @@ Route::get('/pedido-confirmado',[CartController::class,'order_confirmation'])->n
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
-    Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
+    Route::get('/account-pedidos', [UserController::class, 'orders'])->name('user.orders');
+    Route::get('/account-pedidos/{order_id}/detalles', [UserController::class, 'orders_details'])->name('user.orders.details');
 
 });
 

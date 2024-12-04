@@ -35,7 +35,7 @@
 <main class="pt-90" style="padding-top: 0px;">
     <div class="mb-4 pb-4"></div>
     <section class="my-account container">
-        <h2 class="page-title">Orders</h2>
+        <h2 class="page-title">Compras</h2>
         <div class="row">
             <div class="col-lg-2">
                 @include('user.account-nav')
@@ -48,15 +48,15 @@
                             <thead>
                                 <tr>
                                     <th style="width: 80px">OrderNo</th>
-                                    <th>Name</th>
-                                    <th class="text-center">Phone</th>
+                                    <th>Nombre</th>
+                                    <th class="text-center">Telefono</th>
                                     <th class="text-center">Subtotal</th>
                                     <th class="text-center">Total</th>
                                     
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Order Date</th>
-                                    <th class="text-center">Items</th>
-                                    <th class="text-center">Delivered On</th>
+                                    <th class="text-center">Estado</th>
+                                    <th class="text-center">Fecha del Pedido</th>
+                                    <th class="text-center">Artículos</th>
+                                    <th class="text-center">Despachado el</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -74,7 +74,7 @@
                                     <td class="text-center">{{ $order->orderItems->count() }}</td>
                                     <td class="text-center">{{ $order->delivered_date }}</td>
                                     <td class="text-center">
-                                        <a href="account-orders-details.html">
+                                        <a href="{{ route('user.orders.details',['order_id'=>$order->id]) }}">
                                             <div class="list-icon-function view-icon">
                                                 <div class="item eye">
                                                     <i class="fa fa-eye"></i>
