@@ -13,35 +13,33 @@ class Order extends Model
     protected $attributes = [
         'canceled_date' => null, 
     ];
-    
-    protected function createdAt(): Attribute
+
+    protected $casts = [
+        'delivered_date' => 'datetime',
+        'canceled_date' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    // Formatear las fechas al acceder a ellas
+    public function getDeliveredDateAttribute($value)
     {
-        return Attribute::make(
-            get: fn (string $value) => Carbon::parse($value)->format('d/m/Y  H:i'),
-        );
+        return $value ? Carbon::parse($value)->format('d/m/Y H:i') : null;
     }
 
-    protected function updatedAt(): Attribute
+    public function getCanceledDateAttribute($value)
     {
-        return Attribute::make(
-            get: fn (string $value) => Carbon::parse($value)->format('d/m/Y  H:i'),
-        );
+        return $value ? Carbon::parse($value)->format('d/m/Y H:i') : null;
     }
 
-    protected function deliveredDate(): Attribute
+    public function getCreatedAtAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => $value ? Carbon::parse($value)->format('d/m/Y  H:i') : null,
-            set: fn ($value) => $value ? Carbon::createFromFormat('d/m/Y  H:i', $value)->toDateString() : null,
-        );
+        return $value ? Carbon::parse($value)->format('d/m/Y H:i') : null;
     }
 
-    protected function canceledDate(): Attribute
+    public function getUpdatedAtAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => $value ? Carbon::parse($value)->format('d/m/Y  H:i') : null,
-            set: fn ($value) => $value ? Carbon::createFromFormat('d/m/Y  H:i', $value)->toDateString() : null,
-        );
+        return $value ? Carbon::parse($value)->format('d/m/Y H:i') : null;
     }
 
     public function user()

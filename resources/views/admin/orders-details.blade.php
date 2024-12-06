@@ -32,6 +32,9 @@
                         <a class="tf-button style-1 w208" href="{{ route('admin.orders') }}">Atrás</a>
                     </div>
                     <div class="table-responsive">
+                        @if (Session::has('status'))
+                            <p class="alert alert-success">{{ Session::get('status') }}</p>
+                        @endif
                         <table class="table table-striped table-bordered">
                                 <tr>
                                     <th>Orden Nro</th>
@@ -88,33 +91,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    @foreach ($orderItems as $item)
-                                        <td class="pname">
-                                            <div class="image">
-                                                <img src="{{ asset('uploads/products/thumbnails') }}/{{ $item->product->image }}" class="image">
-                                            </div>
-                                            <div class="name">
-                                                <a href="{{ route('shop.products.details',['product_slug'=>$item->product->slug]) }}" target="_blank"
-                                                    class="body-title-2">{{ $item->product->name }}</a>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">${{ $item->price }}</td>
-                                        <td class="text-center">{{ $item->quantity }}</td>
-                                        <td class="text-center">{{ $item->product->SKU }}</td>
-                                        <td class="text-center">{{ $item->product->category->name }}</td>
-                                        <td class="text-center">{{ $item->product->brand->name }}</td>
-                                        <td class="text-center">{{ $item->options }}</td>
-                                        <td class="text-center">{{ $item->rstatus == 0 ? "No":"Si" }}</td>
-                                        <td class="text-center">
-                                            <div class="list-icon-function view-icon">
-                                                <div class="item eye">
-                                                    <i class="icon-eye"></i>
+                                @foreach ($orderItems as $item)
+                                    <tr>
+                                            <td class="pname">
+                                                <div class="image">
+                                                    <img src="{{ asset('uploads/products/thumbnails') }}/{{ $item->product->image }}" class="image">
                                                 </div>
-                                            </div>
-                                        </td>
-                                    @endforeach
-                                </tr>
+                                                <div class="name">
+                                                    <a href="{{ route('shop.products.details',['product_slug'=>$item->product->slug]) }}" target="_blank"
+                                                        class="body-title-2">{{ $item->product->name }}</a>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">${{ $item->price }}</td>
+                                            <td class="text-center">{{ $item->quantity }}</td>
+                                            <td class="text-center">{{ $item->product->SKU }}</td>
+                                            <td class="text-center">{{ $item->product->category->name }}</td>
+                                            <td class="text-center">{{ $item->product->brand->name }}</td>
+                                            <td class="text-center">{{ $item->options }}</td>
+                                            <td class="text-center">{{ $item->rstatus == 0 ? "No":"Si" }}</td>
+                                            <td class="text-center">
+                                                <div class="list-icon-function view-icon">
+                                                    <div class="item eye">
+                                                        <i class="icon-eye"></i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -187,6 +190,30 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="wg-box mt-5">
+                    <h5>Actualizar Estado del pedido</h5>
+                    <form action="{{ route('admin.orders.status.update') }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="order_id" value="{{ $order->id }}">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="select">
+                                    <select name="order_status" id="order_status">
+                                        <option value="ordered" {{ $order->status == 'ordered' ? "selected":"" }}>Encargado</option>
+                                        <option value="delivered" {{ $order->status == 'delivered' ? "selected":"" }}>Enviado</option>
+                                        <option value="canceled" {{ $order->status == 'canceled' ? "selected":"" }}>Cancelado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary tf-button w208">Actulizar Estado</button>
+                            </div>
+                        </div>
+                    </form>
+                    
                 </div>
             </div>
         </div>
