@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Order;
+use App\Models\Slide;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Category;
@@ -507,7 +508,7 @@ class AdminController extends Controller
     {
         $order = Order::find($request->order_id);
         $order->status = $request->order_status;
-        
+
         if ($request->order_status == 'delivered') {
             $order->delivered_date = Carbon::now();
             $order->canceled_date = null;
@@ -529,4 +530,70 @@ class AdminController extends Controller
         }
         return back()->with('status','Estado cambiado correctamente!');
     }
+
+    public function slides()
+    {
+        $slides = Slide::orderBy('id','DESC')->paginate(12);
+        return view('admin.slides',compact('slides'));
+    }
+
+    public function slide_add()
+    {
+        return view('admin.slide-add');
+    }
+
+    public function slide_store(Request $request)
+    {
+        
+        $request->validate([
+            'tagline' => 'required',
+            'title' => 'required',
+            'subtitle' => 'required',
+            'link' => 'required',
+            'status' => 'required',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048'
+        ], [
+            'tagline.required' => 'El campo "eslogan" es obligatorio.',
+            'title.required' => 'El campo "título" es obligatorio.',
+            'subtitle.required' => 'El campo "subtítulo" es obligatorio.',
+            'link.required' => 'El campo "enlace" es obligatorio.',
+            'status.required' => 'El campo "estado" es obligatorio.',
+            'image.required' => 'La imagen es obligatoria.',
+            'image.mimes' => 'La imagen debe ser de tipo PNG, JPG o JPEG.',
+            'image.max' => 'La imagen no puede superar los 2 MB.'
+        ]);
+
+        // Crear un nuevo slider
+        $slide = new Slide();
+        $slide->tagline = $request->tagline;
+        $slide->title = $request->title;
+        $slide->subtitle = $request->subtitle;
+        $slide->link = $request->link;
+        $slide->status = $request->status;
+
+        // Procesar y guardar la imagen
+        $image = $request->file('image');
+        $file_extension = $request->file('image')->extension();
+        $file_name = Carbon::now()->timestamp . '.' . $file_extension;
+        $this->GenSlideThumbnailsImg($image, $file_name);
+        $slide->image = $file_name;
+
+        // Guardar el slider en la base de datos
+        $slide->save();
+
+        // Redirigir con mensaje de éxito
+        return redirect()->route('admin.slides')->back()->with('success', 'El slider se ha creado correctamente.');
+    }
+
+    // Método para generar miniaturas de las imágenes
+    public function GenSlideThumbnailsImg($image, $imageName)
+    {
+        $destinationPath = public_path('uploads/slides');
+        $img = Image::read($image->path());
+        $img->cover(400, 690, "top");
+        $img->resize(400, 690, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $imageName);
+    }
+
 }

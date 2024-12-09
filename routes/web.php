@@ -70,4 +70,8 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/cupones/{id}/edit',[AdminController::class,'edit_coupon'])->name('admin.coupons.edit');
     Route::put('/admin/cupones/update',[AdminController::class,'update_coupon'])->name('admin.coupons.update');
     Route::delete('/admin/cupones/{id}/delete',[AdminController::class,'delete_coupon'])->name('admin.coupons.delete');
+
+    Route::get('/admin/slider',[AdminController::class,'slides'])->name('admin.slides');
+    Route::get('/admin/slider/add',[AdminController::class,'slide_add'])->name('admin.slides.add');
+    Route::post('/admin/slider/store',[AdminController::class,'slide_store'])->name('admin.slides.store');
 });

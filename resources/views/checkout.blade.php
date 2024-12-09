@@ -141,7 +141,7 @@
                   <thead>
                     <tr>
                       <th>Producto</th>
-                      <th align="right">SUBTOTAL</th>
+                      <th >SUBTOTAL</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -150,7 +150,7 @@
                       <td>
                         {{ $item->name }} x {{ $item->qty }}
                       </td>
-                      <td align="right">
+                      <td >
                         ${{ $item->subtotal() }}
                       </td>
                     </tr>
