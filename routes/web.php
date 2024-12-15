@@ -74,4 +74,6 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/slider',[AdminController::class,'slides'])->name('admin.slides');
     Route::get('/admin/slider/add',[AdminController::class,'slide_add'])->name('admin.slides.add');
     Route::post('/admin/slider/store',[AdminController::class,'slide_store'])->name('admin.slides.store');
+    Route::get('/admin/slider/{id}/edit',[AdminController::class,'slide_edit'])->name('admin.slides.edit');
+    Route::put('/admin/slider/update',[AdminController::class,'slide_update'])->name('admin.slides.update');
 });

@@ -63,7 +63,7 @@
                                     <td>{{ $slide->link }}</td>
                                     <td>
                                         <div class="list-icon-function">
-                                            <a href="#">
+                                            <a href="{{ route('admin.slides.edit',['id'=>$slide->id]) }}">
                                                 <div class="item edit">
                                                     <i class="icon-edit-3"></i>
                                                 </div>

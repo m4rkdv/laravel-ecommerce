@@ -582,7 +582,7 @@ class AdminController extends Controller
         $slide->save();
 
         // Redirigir con mensaje de éxito
-        return redirect()->route('admin.slides')->back()->with('success', 'El slider se ha creado correctamente.');
+        return redirect()->route('admin.slides')->with('success', 'El slider se ha creado correctamente.');
     }
 
     // Método para generar miniaturas de las imágenes
@@ -596,4 +596,59 @@ class AdminController extends Controller
         })->save($destinationPath . '/' . $imageName);
     }
 
+    public function slide_edit($id)
+    {
+        $slide= Slide::find($id);
+        return view('admin.slide-edit',compact('slide'));
+    }
+
+    public function slide_update(Request $request)
+    {
+        
+        $request->validate([
+            'tagline' => 'required',
+            'title' => 'required',
+            'subtitle' => 'required',
+            'link' => 'required',
+            'status' => 'required',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048'
+        ], [
+            'tagline.required' => 'El campo "eslogan" es obligatorio.',
+            'title.required' => 'El campo "título" es obligatorio.',
+            'subtitle.required' => 'El campo "subtítulo" es obligatorio.',
+            'link.required' => 'El campo "enlace" es obligatorio.',
+            'status.required' => 'El campo "estado" es obligatorio.',
+            'image.required' => 'La imagen es obligatoria.',
+            'image.mimes' => 'La imagen debe ser de tipo PNG, JPG o JPEG.',
+            'image.max' => 'La imagen no puede superar los 2 MB.'
+        ]);
+
+        // Crear un nuevo slider
+        $slide = Slide::find($request->id);
+        $slide->tagline = $request->tagline;
+        $slide->title = $request->title;
+        $slide->subtitle = $request->subtitle;
+        $slide->link = $request->link;
+        $slide->status = $request->status;
+
+        // Procesar y guardar la imagen
+        if($request->hasFile('image'))
+        {
+            if(File::exists(public_path('uploads/slides').'/'.$slide->image))
+            {
+                File::delete(public_path('uploads/slides').'/'.$slide->image);
+            }
+            $image = $request->file('image');
+            $file_extension = $request->file('image')->extension();
+            $file_name = Carbon::now()->timestamp . '.' . $file_extension;
+            $this->GenSlideThumbnailsImg($image, $file_name);
+            $slide->image = $file_name;
+        }
+
+        // Guardar el slider en la base de datos
+        $slide->save();
+
+        // Redirigir con mensaje de éxito
+        return redirect()->route('admin.slides')->with('success', 'El slider se ha actualizado correctamente!');
+    }
 }

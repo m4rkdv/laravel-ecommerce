@@ -29,12 +29,13 @@
             </div>
             <!-- new-category -->
             <div class="wg-box">
-                <form class="form-new-product form-style-1" action="{{ route('admin.slides.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="form-new-product form-style-1" action="{{ route('admin.slides.update') }}" method="PUT" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <fieldset class="name">
                         <div class="body-title">Tagline <span class="tf-color-1">*</span></div>
                         <input class="flex-grow" type="text" placeholder="Eslogan" name="tagline"
-                            tabindex="0" value="{{ old('tagline') }}" aria-required="true" required="">
+                            tabindex="0" value="{{ $slide->tagline }}" aria-required="true" required="">
                         @error('tagline')
                             <span class="alert alert-danger text-center">{{ $message }}</span>
                         @enderror
@@ -42,15 +43,15 @@
                     <fieldset class="name">
                         <div class="body-title">Titulo <span class="tf-color-1">*</span></div>
                         <input class="flex-grow" type="text" placeholder="titulo" name="title"
-                            tabindex="0" value="{{ old('title') }}" aria-required="true" required="">
+                            tabindex="0" value="{{ $slide->title }}" aria-required="true" required="">
                         @error('title')
                             <span class="alert alert-danger text-center">{{ $message }}</span>
-                        @enderror
+                        @enderror    
                     </fieldset>
                     <fieldset class="name">
                         <div class="body-title">Subtitulo <span class="tf-color-1">*</span></div>
                         <input class="flex-grow" type="text" placeholder="Subtitulo" name="subtitle"
-                            tabindex="0" value="{{ old('subtitle') }}" aria-required="true" required="">
+                            tabindex="0" value="{{ $slide->subtitle }}" aria-required="true" required="">
                         @error('subtitle')
                             <span class="alert alert-danger text-center">{{ $message }}</span>
                         @enderror
@@ -58,7 +59,7 @@
                     <fieldset class="name">
                         <div class="body-title">Link <span class="tf-color-1">*</span></div>
                         <input class="flex-grow" type="text" placeholder="Links" name="link"
-                            tabindex="0" value="{{ old('link') }}" aria-required="true" required="">
+                            tabindex="0" value="{{ $slide->link }}" aria-required="true" required="">
                         @error('link')
                             <span class="alert alert-danger text-center">{{ $message }}</span>
                         @enderror
@@ -67,9 +68,11 @@
                         <div class="body-title">Cargar imagenes <span class="tf-color-1">*</span>
                         </div>
                         <div class="upload-image flex-grow">
-                            <div class="item" id="imgpreview" style="display:none;">
-                                <img src="sample.jpg" class="effect8" alt="">
-                            </div>
+                            @if ($slide->image)
+                                <div class="item" id="imgpreview">
+                                    <img src="{{ asset('uploads/slides').'/'.$slide->image }}" class="effect8" alt="{{ $slide->title }}">
+                                </div>
+                            @endif
                             <div class="item up-load">
                                 <label class="uploadfile" for="myFile">
                                     <span class="icon">
@@ -90,8 +93,8 @@
                         <div class="select flex-grow">
                             <select class="" name="status">
                                 <option>Seleccionar</option>
-                                <option value="1" @if(old('status') == "1") selected @endif>Activo</option>
-                                <option value="0" @if(old('status') == "0") selected @endif>Inactivo</option>
+                                <option value="1" @if($slide->status == "1") selected @endif>Activo</option>
+                                <option value="0" @if($slide->status == "0") selected @endif>Inactivo</option>
                             </select>
                             @error('status')
                                 <span class="alert alert-danger text-center">{{ $message }}</span>
