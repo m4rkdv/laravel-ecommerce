@@ -582,7 +582,7 @@ class AdminController extends Controller
         $slide->save();
 
         // Redirigir con mensaje de éxito
-        return redirect()->route('admin.slides')->with('success', 'El slider se ha creado correctamente.');
+        return redirect()->route('admin.slides')->with('status', 'El slider se ha creado correctamente.');
     }
 
     // Método para generar miniaturas de las imágenes
@@ -604,14 +604,13 @@ class AdminController extends Controller
 
     public function slide_update(Request $request)
     {
-        
         $request->validate([
             'tagline' => 'required',
             'title' => 'required',
             'subtitle' => 'required',
             'link' => 'required',
             'status' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg|max:2048'
+            'image' => 'nullable|mimes:png,jpg,jpeg|max:2048'
         ], [
             'tagline.required' => 'El campo "eslogan" es obligatorio.',
             'title.required' => 'El campo "título" es obligatorio.',
@@ -649,6 +648,17 @@ class AdminController extends Controller
         $slide->save();
 
         // Redirigir con mensaje de éxito
-        return redirect()->route('admin.slides')->with('success', 'El slider se ha actualizado correctamente!');
+        return redirect()->route('admin.slides')->with('status', 'El slider se ha actualizado correctamente!');
+    }
+
+    public function slide_delete($id)
+    {
+        $slide = Slide::find($id);
+        if (File::exists(public_path('uploads/slides'.'/'.$slide->image)))
+        {
+            File::delete(public_path('uploads/slides'.'/'.$slide->image));
+        }
+        $slide->delete();
+        return redirect()->route('admin.slides')->with('status','El Slide ha sido borrado exitosamente.');
     }
 }

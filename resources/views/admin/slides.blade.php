@@ -36,6 +36,14 @@
                             class="icon-plus"></i>Agregar Nuevo</a>
                 </div>
                 <div class="wg-table table-all-user">
+                    @if(Session::has('status'))
+                        @php
+                            $statusMessage = Session::get('status');
+                            $alertClass = str_contains($statusMessage, 'borrado') ? 'alert-danger' : 'alert-success';
+                        @endphp
+
+                        <p class="alert {{ $alertClass }}">{{ $statusMessage }}</p>
+                    @endif
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -68,7 +76,9 @@
                                                     <i class="icon-edit-3"></i>
                                                 </div>
                                             </a>
-                                            <form action="" method="POST">
+                                            <form action="{{ route('admin.slides.delete',['id'=>$slide->id]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
                                                 <div class="item text-danger delete">
                                                     <i class="icon-trash-2"></i>
                                                 </div>
@@ -88,3 +98,24 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(function()
+        {
+            $('.delete').on('click',function(e)
+            {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                swal({
+                    title:"Esta seguro?",
+                    text:"Usteded desea eliminar este Slider?",
+                    type:"warning",
+                    buttons:["No","Si"],
+                    confirmButtonColor:"#dc3545"
+                }).then(function(result){
+                    if (result){form.submit();} 
+                });
+            });
+        })
+    </script>
+@endpush

@@ -29,9 +29,10 @@
             </div>
             <!-- new-category -->
             <div class="wg-box">
-                <form class="form-new-product form-style-1" action="{{ route('admin.slides.update') }}" method="PUT" enctype="multipart/form-data">
+                <form class="form-new-product form-style-1" action="{{ route('admin.slides.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="id" value="{{ $slide->id }}">
                     <fieldset class="name">
                         <div class="body-title">Tagline <span class="tf-color-1">*</span></div>
                         <input class="flex-grow" type="text" placeholder="Eslogan" name="tagline"
