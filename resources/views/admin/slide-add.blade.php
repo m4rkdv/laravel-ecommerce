@@ -66,11 +66,16 @@
                     <fieldset>
                         <div class="body-title">Cargar imagenes <span class="tf-color-1">*</span>
                         </div>
+                        @error('image')
+                                <span class="alert alert-danger text-center">{{ $message }}</span>
+                            @enderror
                         <div class="upload-image flex-grow">
+                            
                             <div class="item" id="imgpreview" style="display:none;">
                                 <img src="sample.jpg" class="effect8" alt="">
                             </div>
                             <div class="item up-load">
+                                
                                 <label class="uploadfile" for="myFile">
                                     <span class="icon">
                                         <i class="icon-upload-cloud"></i>
@@ -79,10 +84,8 @@
                                             class="tf-color">click para buscar</span></span>
                                     <input type="file" id="myFile" name="image">
                                 </label>
+                              
                             </div>
-                            @error('image')
-                                <span class="alert alert-danger text-center">{{ $message }}</span>
-                            @enderror
                         </div>
                     </fieldset>
                     <fieldset class="category">

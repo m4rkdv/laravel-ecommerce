@@ -59,7 +59,7 @@
                         <tbody>
                             @foreach ($slides as $slide)
                                 <tr>
-                                    <td>3</td>
+                                    <td>{{ $slide->id }}</td>
                                     <td class="pname">
                                         <div class="image">
                                             <img src="{{ asset('uploads/slides') }}/{{ $slide->image }}" alt="" class="image">

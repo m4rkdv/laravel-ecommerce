@@ -309,19 +309,19 @@
         <div class="overflow-hidden">
           <ul class="navigation__list list-unstyled position-relative">
             <li class="navigation__item">
-              <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
+              <a href="{{ route('home.index') }}" class="navigation__link">Inicio</a>
             </li>
             <li class="navigation__item">
-              <a href="{{ route('shop.index') }}" class="navigation__link">Shop</a>
+              <a href="{{ route('shop.index') }}" class="navigation__link">Tienda</a>
             </li>
             <li class="navigation__item">
-              <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
+              <a href="{{ route('cart.index') }}" class="navigation__link">Carrito</a>
             </li>
             <li class="navigation__item">
-              <a href="about.html" class="navigation__link">About</a>
+              <a href="about.html" class="navigation__link">Sobre Nosotros</a>
             </li>
             <li class="navigation__item">
-              <a href="contact.html" class="navigation__link">Contact</a>
+              <a href="contact.html" class="navigation__link">Contacto</a>
             </li>
           </ul>
         </div>
@@ -333,7 +333,7 @@
             xmlns="http://www.w3.org/2000/svg">
             <use href="#icon_user" />
           </svg>
-          <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">My Account</span>
+          <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">Mi cuenta</span>
         </div>
 
 
@@ -398,19 +398,19 @@
         <nav class="navigation">
           <ul class="navigation__list list-unstyled d-flex">
             <li class="navigation__item">
-              <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
+              <a href="{{ route('home.index') }}" class="navigation__link">Inicio</a>
             </li>
             <li class="navigation__item">
-              <a href="{{ route('shop.index') }}" class="navigation__link">Shop</a>
+              <a href="{{ route('shop.index') }}" class="navigation__link">Tienda</a>
             </li>
             <li class="navigation__item">
-              <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
+              <a href="{{ route('cart.index') }}" class="navigation__link">Carrito</a>
             </li>
             <li class="navigation__item">
-              <a href="about.html" class="navigation__link">About</a>
+              <a href="about.html" class="navigation__link">Sobre Nosotros</a>
             </li>
             <li class="navigation__item">
-              <a href="contact.html" class="navigation__link">Contact</a>
+              <a href="contact.html" class="navigation__link">Contacto</a>
             </li>
           </ul>
         </nav>

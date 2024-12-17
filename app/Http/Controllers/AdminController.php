@@ -550,7 +550,7 @@ class AdminController extends Controller
             'title' => 'required',
             'subtitle' => 'required',
             'link' => 'required',
-            'status' => 'required',
+            'status' => 'required|in:1,0',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048'
         ], [
             'tagline.required' => 'El campo "eslogan" es obligatorio.',
@@ -558,6 +558,7 @@ class AdminController extends Controller
             'subtitle.required' => 'El campo "subtítulo" es obligatorio.',
             'link.required' => 'El campo "enlace" es obligatorio.',
             'status.required' => 'El campo "estado" es obligatorio.',
+            'status.in' => 'El valor seleccionado para "estado" no es válido.',
             'image.required' => 'La imagen es obligatoria.',
             'image.mimes' => 'La imagen debe ser de tipo PNG, JPG o JPEG.',
             'image.max' => 'La imagen no puede superar los 2 MB.'
