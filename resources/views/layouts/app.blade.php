@@ -262,7 +262,7 @@
   </style>
   <div class="header-mobile header_sticky">
     <div class="container d-flex align-items-center h-100">
-      <a class="mobile-nav-activator d-block position-relative" href="#">
+      <a class="mobile-nav-activator d-block position-relative" href="{{ route('home.index') }}">
         <svg class="nav-icon" width="25" height="18" viewBox="0 0 25 18" xmlns="http://www.w3.org/2000/svg">
           <use href="#icon_nav" />
         </svg>
@@ -275,11 +275,13 @@
         </a>
       </div>
 
-      <a href="#" class="header-tools__item header-tools__cart js-open-aside" data-aside="cartDrawer">
+      <a href="{{ route('cart.index') }}" class="header-tools__item header-tools__cart ">
         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <use href="#icon_cart" />
         </svg>
-        <span class="cart-amount d-block position-absolute js-cart-items-count">3</span>
+        @if (Cart::instance('cart')->content()->count()>0)
+              <span class="cart-amount d-block position-absolute js-cart-items-count">{{ Cart::instance('cart')->content()->count() }}</span>
+        @endif
       </a>
     </div>
 
@@ -333,7 +335,9 @@
             xmlns="http://www.w3.org/2000/svg">
             <use href="#icon_user" />
           </svg>
-          <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">Mi cuenta</span>
+          <a href="{{ route('user.index')  }}">
+            <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">Mi cuenta</span>
+          </a>
         </div>
 
 
@@ -391,7 +395,7 @@
       <div class="header-desk header-desk_type_1">
         <div class="logo">
           <a href="{{ route('home.index') }}">
-            <img src="{{ asset('assets/images/logo.png')}}" alt="Uomo" class="logo__image d-block" />
+            <img src="{{ asset('assets/images/logo.png')}}" alt="Gladiador Motopartes" class="logo__image d-block" />
           </a>
         </div>
 
@@ -565,18 +569,15 @@
         </div>
 
         <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Company</h6>
+          <h6 class="sub-menu__title text-uppercase">Empresa</h6>
           <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About Us</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a></li>
-            <li class="sub-menu__item"><a href="blog_list1.html" class="menu-link menu-link_us-s">Blog</a></li>
-            <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact Us</a></li>
+            <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">Sobre Nosotros</a></li>
+            <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contacto</a></li>
           </ul>
         </div>
 
         <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Shop</h6>
+          <h6 class="sub-menu__title text-uppercase">Tienda</h6>
           <ul class="sub-menu__list list-unstyled">
             <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a></li>
             <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a></li>
@@ -587,20 +588,22 @@
         </div>
 
         <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Help</h6>
+          <h6 class="sub-menu__title text-uppercase">Ayuda y Soporte</h6>
           <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a></li>
-            <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">My Account</a>
+            <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">Preguntas Frecuentes</a>
             </li>
-            <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
+            <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">Políticas de devolución</a>
             </li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal & Privacy</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a></li>
+            <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Encontrar una tienda</a>
+            </li>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal & Privacidad</a></li>
+            <li class="sub-menu__item"><a href="{{ route('user.index') }}" class="menu-link menu-link_us-s">Mi Cuenta</a>
+            </li>
           </ul>
         </div>
 
         <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Categories</h6>
+          <h6 class="sub-menu__title text-uppercase">Categorias</h6>
           <ul class="sub-menu__list list-unstyled">
             <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shirts</a></li>
             <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Jeans</a></li>
@@ -612,6 +615,7 @@
       </div>
     </div>
 
+    <!--
     <div class="footer-bottom">
       <div class="container d-md-flex align-items-center">
         <span class="footer-copyright me-auto">©2024 Surfside Media</span>
@@ -621,6 +625,7 @@
         </div>
       </div>
     </div>
+    -->
   </footer>
 
 
@@ -632,7 +637,7 @@
             xmlns="http://www.w3.org/2000/svg">
             <use href="#icon_home" />
           </svg>
-          <span>Home</span>
+          <span>Inicio</span>
         </a>
       </div>
 
@@ -642,20 +647,7 @@
             xmlns="http://www.w3.org/2000/svg">
             <use href="#icon_hanger" />
           </svg>
-          <span>Shop</span>
-        </a>
-      </div>
-
-      <div class="col-4">
-        <a href="{{ route('home.index') }}" class="footer-mobile__link d-flex flex-column align-items-center">
-          <div class="position-relative">
-            <svg class="d-block" width="18" height="18" viewBox="0 0 20 20" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <use href="#icon_heart" />
-            </svg>
-            <span class="wishlist-amount d-block position-absolute js-wishlist-count">3</span>
-          </div>
-          <span>Wishlist</span>
+          <span>Tienda</span>
         </a>
       </div>
     </div>
