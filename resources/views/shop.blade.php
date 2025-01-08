@@ -208,7 +208,7 @@
                         </svg></span>
                     </div>
                     @if (Cart::instance('cart')->content()->where('id',$product->id)->count()>0)
-                        <a href="{{ route('cart.index') }}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">Ir al Carrito</a>
+                        <a href="{{ route('cart.index') }}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-info mb-3">Ir al Carrito</a>
                     @else
                         <form name="addtocart-form" method="post" action="{{ route('cart.add') }}">
                             @csrf
@@ -218,7 +218,7 @@
                         <input type="hidden" name="price" value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}" />    
                         <button
                             type="submit"
-                            class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium"
+                            class="pc__atc btn-info anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium"
                             data-aside="cartDrawer" title="Add To Cart">Agregar al Carrito</button>
                         </form>    
                     @endif    

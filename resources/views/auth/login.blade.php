@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-
+<style>
+    .login-register{
+        background-color: black;
+    }
+    .form-floating{
+        color: black !important;
+        background-color: #222 !important;
+    }
+</style>
 <main class="pt-90">
     <div class="mb-4 pb-4"></div>
     <section class="login-register container">
@@ -18,7 +26,7 @@
                 @csrf
               <div class="form-floating mb-3">
                 <input class="form-control form-control_gray @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required="" autocomplete="email" autofocus="">
-                <label for="email">Email address *</label>
+                <label for="email">Email *</label>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -31,7 +39,7 @@
               <div class="form-floating mb-3">
                 <input id="password" type="password" class="form-control form-control_gray @error('password') is-invalid @enderror" name="password" required=""
                   autocomplete="current-password">
-                <label for="customerPasswodInput">Password *</label>
+                <label for="customerPasswodInput">Contraseña *</label>
                 @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -39,11 +47,11 @@
                 @enderror
               </div>
 
-              <button class="btn btn-primary w-100 text-uppercase" type="submit">Log In</button>
+              <button class="btn btn-primary w-100 text-uppercase" type="submit">Ingresar</button>
 
               <div class="customer-option mt-4 text-center">
-                <span class="text-secondary">No account yet?</span>
-                <a href="{{ route('register') }}" class="btn-text js-show-register">Create Account</a>
+                <span class="text-secondary">¿Aún no tienes una cuenta?</span>
+                <a href="{{ route('register') }}" class="btn-text js-show-register">Regístrate ahora</a>
               </div>
             </form>
           </div>
