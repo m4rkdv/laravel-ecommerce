@@ -79,7 +79,7 @@
                                     <span class="icon">
                                         <i class="icon-upload-cloud"></i>
                                     </span>
-                                    <span class="body-text">Suelta tus imágenes aquí o selecciona.<span
+                                    <span class="body-text">Arrastra las imágenes aquí o <span
                                             class="tf-color">click para buscar</span></span>
                                     <input type="file" id="myFile" name="image">
                                 </label>

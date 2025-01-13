@@ -41,10 +41,10 @@
             <table class="cart-table">
                 <thead>
                 <tr>
-                    <th>Product</th>
+                    <th>Productos</th>
                     <th></th>
-                    <th>Price</th>
-                    <th>Quantity</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
                     <th>Subtotal</th>
                     <th></th>
                 </tr>
@@ -154,7 +154,7 @@
                         <td>${{ Session::get('discounts')['subtotal'] }}</td>
                     </tr>
                     <tr>
-                        <th>Shipping</th>
+                        <th>Envío</th>
                         <td>
                         Free
                         </td>
@@ -188,7 +188,7 @@
                 </div>
                 <div class="mobile_fixed-btn_wrapper">
                 <div class="button-wrapper container">
-                    <a href="{{ route('cart.checkout') }}" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>
+                    <a href="{{ route('cart.checkout') }}" class="btn btn-primary btn-checkout">Finalizar Compra</a>
                 </div>
                 </div>
             </div>
@@ -196,8 +196,8 @@
         @else
             <div class="row">
                 <div class="col-md-12 text-center pt-5 bp-5">
-                    <p>No item found in your cart</p>
-                    <a href="{{ route('shop.index') }}" class="btn btn-info">Shop now</a>
+                    <p>Tu carrito está vacío</p>
+                    <a href="{{ route('shop.index') }}" class="btn btn-info">Explorar productos</a>
                 </div>
             </div>    
         @endif

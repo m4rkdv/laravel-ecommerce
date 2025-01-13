@@ -4,7 +4,7 @@
     <div class="main-content-inner">
         <div class="main-content-wrap">
             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                <h3>Coupon infomation</h3>
+                <h3>Información del Cupón</h3>
                 <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                     <li>
                         <a href="{{ route('admin.index') }}">
@@ -33,20 +33,20 @@
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $coupon->id }}" />
                     <fieldset class="name">
-                        <div class="body-title">Coupon Code <span class="tf-color-1">*</span></div>
-                        <input class="flex-grow" type="text" placeholder="Coupon Code" name="code"
+                        <div class="body-title">Código del Cupón <span class="tf-color-1">*</span></div>
+                        <input class="flex-grow" type="text" placeholder="Código del cupón" name="code"
                             tabindex="0" value="{{ $coupon->code }}" aria-required="true" required="">
                     </fieldset>
                     @error('code')
                         <span class="alert alert-danger text-center">{{ $message }}</span>
                     @enderror
                     <fieldset class="category">
-                        <div class="body-title">Coupon Type</div>
+                        <div class="body-title">Tipo de Cupón</div>
                         <div class="select flex-grow">
                             <select class="" name="type">
-                                <option value="">Select</option>
-                                <option value="fixed" {{ $coupon->type == 'fixed' ? 'selected':'' }} >Fixed</option>
-                                <option value="percent" {{ $coupon->type == 'percent' ? 'selected':'' }} >Percent</option>
+                                <option value="">Seleccionar</option>
+                                <option value="fixed" {{ $coupon->type == 'fixed' ? 'selected':'' }} >Fijo</option>
+                                <option value="percent" {{ $coupon->type == 'percent' ? 'selected':'' }} >Porcentual</option>
                             </select>
                         </div>
                     </fieldset>
@@ -54,16 +54,16 @@
                         <span class="alert alert-danger text-center">{{ $message }}</span>
                     @enderror
                     <fieldset class="name">
-                        <div class="body-title">Value <span class="tf-color-1">*</span></div>
-                        <input class="flex-grow" type="text" placeholder="Coupon Value" name="value"
+                        <div class="body-title">Valor <span class="tf-color-1">*</span></div>
+                        <input class="flex-grow" type="text" placeholder="Valor del cupón" name="value"
                             tabindex="0" value="{{ $coupon->value }}" aria-required="true" required="">
                     </fieldset>
                     @error('value')
                         <span class="alert alert-danger text-center">{{ $message }}</span>
                     @enderror
                     <fieldset class="name">
-                        <div class="body-title">Cart Value <span class="tf-color-1">*</span></div>
-                        <input class="flex-grow" type="text" placeholder="Cart Value"
+                        <div class="body-title">Valor del Carrito(min) <span class="tf-color-1">*</span></div>
+                        <input class="flex-grow" type="text" placeholder="Valor mínimo del Carrito"
                             name="cart_value" tabindex="0" value="{{ $coupon->cart_value }}" aria-required="true"
                             required="">
                     </fieldset>
@@ -71,7 +71,7 @@
                         <span class="alert alert-danger text-center">{{ $message }}</span>
                     @enderror
                     <fieldset class="name">
-                        <div class="body-title">Expiry Date <span class="tf-color-1">*</span></div>
+                        <div class="body-title">Fecha de Expiración <span class="tf-color-1">*</span></div>
                         <input class="flex-grow" type="date" placeholder="Expiry Date"
                             name="expiry_date" tabindex="0" value="{{ $coupon->expiry_date }}" aria-required="true"
                             required="">
@@ -82,7 +82,7 @@
                     
                     <div class="bot">
                         <div></div>
-                        <button class="tf-button w208" type="submit">Save</button>
+                        <button class="tf-button w208" type="submit">Guardar</button>
                     </div>
                 </form>
             </div>

@@ -49,12 +49,12 @@
                   </div>
                   <div class="center">
                       <div class="center-item">
-                          <div class="center-heading">Main Home</div>
+                          <div class="center-heading">Inicio</div>
                           <ul class="menu-list">
                               <li class="menu-item">
                                   <a href="{{ route('admin.index') }}" class="">
                                       <div class="icon"><i class="icon-grid"></i></div>
-                                      <div class="text">Dashboard</div>
+                                      <div class="text">Panel de Control</div>
                                   </a>
                               </li>
                           </ul>
@@ -64,17 +64,17 @@
                               <li class="menu-item has-children">
                                   <a href="javascript:void(0);" class="menu-item-button">
                                       <div class="icon"><i class="icon-shopping-cart"></i></div>
-                                      <div class="text">Products</div>
+                                      <div class="text">Producto</div>
                                   </a>
                                   <ul class="sub-menu">
                                       <li class="sub-menu-item">
                                           <a href="{{ route('admin.products.add') }}" class="">
-                                              <div class="text">Add Product</div>
+                                              <div class="text">Nuevo Producto</div>
                                           </a>
                                       </li>
                                       <li class="sub-menu-item">
                                           <a href="{{ route('admin.products') }}" class="">
-                                              <div class="text">Products</div>
+                                              <div class="text">Productos</div>
                                           </a>
                                       </li>
                                   </ul>
@@ -82,17 +82,17 @@
                               <li class="menu-item has-children">
                                   <a href="javascript:void(0);" class="menu-item-button">
                                       <div class="icon"><i class="icon-layers"></i></div>
-                                      <div class="text">Brand</div>
+                                      <div class="text">Marca</div>
                                   </a>
                                   <ul class="sub-menu">
                                       <li class="sub-menu-item">
                                           <a href="{{route('admin.brand.add')}}" class="">
-                                              <div class="text">New Brand</div>
+                                              <div class="text">Nueva Marca</div>
                                           </a>
                                       </li>
                                       <li class="sub-menu-item">
                                           <a href="{{ route('admin.brands') }}" class="">
-                                              <div class="text">Brands</div>
+                                              <div class="text">Marcas</div>
                                           </a>
                                       </li>
                                   </ul>
@@ -100,17 +100,17 @@
                               <li class="menu-item has-children">
                                   <a href="javascript:void(0);" class="menu-item-button">
                                       <div class="icon"><i class="icon-layers"></i></div>
-                                      <div class="text">Category</div>
+                                      <div class="text">Categoría</div>
                                   </a>
                                   <ul class="sub-menu">
                                       <li class="sub-menu-item">
                                           <a href="{{ route('admin.categories.add') }}" class="">
-                                              <div class="text">New Category</div>
+                                              <div class="text">Nueva Categoría</div>
                                           </a>
                                       </li>
                                       <li class="sub-menu-item">
                                           <a href="{{ route('admin.categories') }}" class="">
-                                              <div class="text">Categories</div>
+                                              <div class="text">Categorias</div>
                                           </a>
                                       </li>
                                   </ul>

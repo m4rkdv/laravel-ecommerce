@@ -30,7 +30,7 @@
             <h5 class="accordion-header" id="accordion-heading-1">
                 <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button" data-bs-toggle="collapse"
                 data-bs-target="#accordion-filter-1" aria-expanded="true" aria-controls="accordion-filter-1">
-                Product Categories
+                Categorías de Productos
                 <svg class="accordion-button__icon type2" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                     <g aria-hidden="true" stroke="none" fill-rule="evenodd">
                     <path
@@ -65,7 +65,7 @@
                 <h5 class="accordion-header" id="accordion-heading-brand">
                     <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button" data-bs-toggle="collapse"
                     data-bs-target="#accordion-filter-brand" aria-expanded="true" aria-controls="accordion-filter-brand">
-                    Brands
+                    Marcas
                     <svg class="accordion-button__icon type2" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                         <g aria-hidden="true" stroke="none" fill-rule="evenodd">
                         <path
@@ -104,7 +104,7 @@
                 <h5 class="accordion-header mb-2" id="accordion-heading-price">
                     <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button" data-bs-toggle="collapse"
                     data-bs-target="#accordion-filter-price" aria-expanded="true" aria-controls="accordion-filter-price">
-                    Price
+                    Precio
                     <svg class="accordion-button__icon type2" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                         <g aria-hidden="true" stroke="none" fill-rule="evenodd">
                         <path
@@ -119,11 +119,11 @@
                     data-slider-max="500" data-slider-step="5" data-slider-value="[{{ $min_price }},{{ $max_price }}]" data-currency="$" />
                     <div class="price-range__info d-flex align-items-center mt-2">
                     <div class="me-auto">
-                        <span class="text-secondary">Min Price: </span>
+                        <span class="text-secondary">Precio Mín: </span>
                         <span class="price-range__min">$1</span>
                     </div>
                     <div>
-                        <span class="text-secondary">Max Price: </span>
+                        <span class="text-secondary">Precio Máx: </span>
                         <span class="price-range__max">$500</span>
                     </div>
                     </div>
@@ -145,24 +145,24 @@
 
             <div class="shop-acs d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
                 <select class="shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0" aria-label="Page Size" id="pagesize" name="pagesize" style="margin-right: 20px">
-                    <option value="12" {{ $size==12 ? 'selected':'' }}>Show</option>
-                    <option value="24" {{ $size==24 ? 'selected':'' }}>24</option>
-                    <option value="48" {{ $size==48 ? 'selected':'' }}>48</option>
-                    <option value="102" {{ $size==102 ? 'selected':'' }}>102</option>
+                    <option value="12" {{ $size==12 ? 'selected':'' }}>Mostrar 12</option>
+                    <option value="24" {{ $size==24 ? 'selected':'' }}>Mostrar 24</option>
+                    <option value="48" {{ $size==48 ? 'selected':'' }}>Mostrar 48</option>
+                    <option value="102" {{ $size==102 ? 'selected':'' }}>Mostrar 102</option>
                 </select>    
                 <select class="shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0" aria-label="Sort Items"
                     name="orderby" id="orderby">
-                    <option value="-1" {{ $order == -1 ? 'selected':'' }}>Default</option>
-                    <option value="1" {{ $order == 1 ? 'selected':'' }}>Date, New to Old</option>
-                    <option value="2" {{ $order == 2 ? 'selected':'' }}>Date, Old to New</option>
-                    <option value="3" {{ $order == 3 ? 'selected':'' }}>Price, Low to High</option>
-                    <option value="4" {{ $order == 4 ? 'selected':'' }}>Price, High to Low</option>
+                    <option value="-1" {{ $order == -1 ? 'selected':'' }}>Orden predeterminado</option>
+                    <option value="1" {{ $order == 1 ? 'selected':'' }}>Fecha: Nuevo a Antiguo</option>
+                    <option value="2" {{ $order == 2 ? 'selected':'' }}>Fecha: Antiguo a Nuevo</option>
+                    <option value="3" {{ $order == 3 ? 'selected':'' }}>Precio: Menor a Mayor</option>
+                    <option value="4" {{ $order == 4 ? 'selected':'' }}>Precio: Mayor a Menor</option>
                 </select>
 
                 <div class="shop-asc__seprator mx-3 bg-light d-none d-md-block order-md-0"></div>
 
                 <div class="col-size align-items-center order-1 d-none d-lg-flex">
-                    <span class="text-uppercase fw-medium me-2">View</span>
+                    <span class="text-uppercase fw-medium me-2">Columnas</span>
                     <button class="btn-link fw-medium me-2 js-cols-size" data-target="products-grid" data-cols="2">2</button>
                     <button class="btn-link fw-medium me-2 js-cols-size" data-target="products-grid" data-cols="3">3</button>
                     <button class="btn-link fw-medium js-cols-size" data-target="products-grid" data-cols="4">4</button>
@@ -174,7 +174,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <use href="#icon_filter" />
                     </svg>
-                    <span class="text-uppercase fw-medium d-inline-block align-middle">Filter</span>
+                    <span class="text-uppercase fw-medium d-inline-block align-middle">Filtros</span>
                     </button>
                 </div>
                 </div>

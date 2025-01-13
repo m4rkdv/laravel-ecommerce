@@ -50,8 +50,8 @@
               <button class="btn btn-primary w-100 text-uppercase" type="submit">Ingresar</button>
 
               <div class="customer-option mt-4 text-center">
-                <span class="text-secondary">¿Aún no tienes una cuenta?</span>
-                <a href="{{ route('register') }}" class="btn-text js-show-register">Regístrate ahora</a>
+                <span class="text-secondary">¿ No tenés cuenta ?</span>
+                <a href="{{ route('register') }}" class="btn-text js-show-register">Regístrarse ahora</a>
               </div>
             </form>
           </div>

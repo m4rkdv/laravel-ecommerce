@@ -19,7 +19,7 @@
               <div class="form-floating mb-3">
                 <input class="form-control form-control_gray @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required="" autocomplete="name"
                   autofocus="">
-                <label for="name">Name</label>
+                <label for="name">Nombre</label>
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -31,7 +31,7 @@
               <div class="form-floating mb-3">
                 <input id="email" type="email" class="form-control form-control_gray @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required=""
                   autocomplete="email">
-                <label for="email">Email address *</label>
+                <label for="email">Email *</label>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
               <div class="form-floating mb-3">
                 <input id="mobile" type="mobile" class="form-control form-control_gray @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required=""
                   autocomplete="mobile">
-                <label for="mobile">Mobile</label>
+                <label for="mobile">Teléfono</label>
                 @error('mobile')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -68,19 +68,19 @@
               <div class="form-floating mb-3">
                 <input id="password-confirm" type="password" class="form-control form-control_gray @error('password') is-invalid @enderror"
                   name="password_confirmation" required="" autocomplete="new-password">
-                <label for="password">Confirm Password *</label>
+                <label for="password">Confirmar Password *</label>
               </div>
 
               <div class="d-flex align-items-center mb-3 pb-2">
-                <p class="m-0">Your personal data will be used to support your experience throughout this website, to
-                  manage access to your account, and for other purposes described in our privacy policy.</p>
+                <p class="m-0">Tus datos personales se utilizarán para mejorar tu experiencia en este sitio, gestionar el acceso a tu cuenta y
+                  otros fines detallados en nuestra <a href="/privacy-policy" target="_blank" class="text-primary">política de privacidad</a>.</p>
               </div>
 
-              <button class="btn btn-primary w-100 text-uppercase" type="submit">Register</button>
+              <button class="btn btn-primary w-100 text-uppercase" type="submit">Registrar</button>
 
               <div class="customer-option mt-4 text-center">
-                <span class="text-secondary">Have an account?</span>
-                <a href="{{ route('login') }}" class="btn-text js-show-register">Login to your Account</a>
+                <span class="text-secondary">¿Ya tienes una cuenta?</span>
+                <a href="{{ route('login') }}" class="btn-text js-show-register">Inicia sesión aquí</a>
               </div>
             </form>
           </div>

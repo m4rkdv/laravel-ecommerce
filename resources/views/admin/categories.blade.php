@@ -4,18 +4,18 @@
     <div class="main-content-inner">
         <div class="main-content-wrap">
             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                <h3>Category</h3>
+                <h3>Categoría</h3>
                 <ul class="breadcrumbSSs flex items-center flex-wrap justify-start gap10">
                     <li>
                         <a href="{{ route('admin.index') }}">
-                            <div class="text-tiny">Dashboard</div>
+                            <div class="text-tiny">Panel de Control</div>
                         </a>
                     </li>
                     <li>
                         <i class="icon-chevron-right"></i>
                     </li>
                     <li>
-                        <div class="text-tiny">Categories</div>
+                        <div class="text-tiny">Categorias</div>
                     </li>
                 </ul>
             </div>
@@ -34,7 +34,7 @@
                         </form>
                     </div>
                     <a class="tf-button style-1 w208" href="{{route('admin.categories.add')}}"><i
-                            class="icon-plus"></i>Add new</a>
+                            class="icon-plus"></i>Agregar nueva</a>
                 </div>
                 <div class="wg-table table-all-user">
                     <div class="table-responsive">
@@ -50,10 +50,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
+                                    <th>Nombre</th>
                                     <th>Slug</th>
-                                    <th>Products</th>
-                                    <th>Action</th>
+                                    <th>Productos</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,7 +69,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $category->slug }}</td>
-                                    <td><a href="#" target="_blank">0</a></td>
+                                    <td><a href="#" target="_blank">{{ $category->products_count }}</a></td>
                                     <td>
                                         <div class="list-icon-function">
                                             <a href="{{route('admin.categories.edit',['id'=>$category->id])}}">

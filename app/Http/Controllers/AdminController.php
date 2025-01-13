@@ -23,7 +23,7 @@ class AdminController extends Controller
     }
 
     public function brands(){
-        $brands = Brand::orderBy('id','DESC')->paginate(10);
+        $brands = Brand::withCount('products')->orderBy('id','DESC')->paginate(10);
         return view('admin.brands',compact('brands'));
     }
 
@@ -112,7 +112,7 @@ class AdminController extends Controller
 
     public function categories()
     {
-        $categories=Category::orderBy('id','DESC')->paginate(10);
+        $categories=Category::withCount('products')->orderBy('id','DESC')->paginate(10);
         return view('admin.categories',compact('categories'));
     }
 

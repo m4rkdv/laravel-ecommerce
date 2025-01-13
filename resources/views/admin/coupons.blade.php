@@ -4,18 +4,18 @@
     <div class="main-content-inner">
         <div class="main-content-wrap">
             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                <h3>Coupons</h3>
+                <h3>Cupones</h3>
                 <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                     <li>
                         <a href="{{ route('admin.index') }}">
-                            <div class="text-tiny">Dashboard</div>
+                            <div class="text-tiny">Panel de Control</div>
                         </a>
                     </li>
                     <li>
                         <i class="icon-chevron-right"></i>
                     </li>
                     <li>
-                        <div class="text-tiny">Coupons</div>
+                        <div class="text-tiny">Cupones</div>
                     </li>
                 </ul>
             </div>
@@ -34,7 +34,7 @@
                         </form>
                     </div>
                     <a class="tf-button style-1 w208" href="{{ route('admin.coupons.add') }}"><i
-                            class="icon-plus"></i>Add new</a>
+                            class="icon-plus"></i>Agregar Nuevo</a>
                 </div>
                 <div class="wg-table table-all-user">
                     <div class="table-responsive">
@@ -50,12 +50,12 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Code</th>
-                                    <th>Type</th>
-                                    <th>Value</th>
-                                    <th>Cart Value</th>
-                                    <th>Expiry Date</th>
-                                    <th>Action</th>
+                                    <th>Código</th>
+                                    <th>Tipo</th>
+                                    <th>Valor</th>
+                                    <th>Valor del Carrito</th>
+                                    <th>Fecha de Expiración</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
