@@ -64,7 +64,7 @@
                                                 @if ($order->status == 'delivered')
                                                 <span class="badge bg-success">Entregado</span>
                                                 @elseif ($order->status == 'ordered')
-                                                <span class="badge bg-warning">Ordenado</span>
+                                                <span class="badge bg-warning">Solicitado</span>
                                                 @else
                                                 <span class="badge bg-danger">Cancelado</span>
                                                 @endif
