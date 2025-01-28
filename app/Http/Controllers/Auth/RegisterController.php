@@ -50,9 +50,22 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'mobile' => ['required', 'digits:10', 'unique:users'],
+            'mobile' => [
+            'required',
+            'digits:10', 
+            'regex:/^(?:(?:11|2\d{2}|3\d{2}|6\d{2}|7\d{2}|8\d{2}|9\d{2})\d{7})$/', // Valida el código de área
+            'unique:users',
+            ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'mobile.required' => 'El número de celular es obligatorio.',
+            'mobile.digits' => 'El número de celular debe tener exactamente 10 dígitos.',
+            'mobile.regex' => 'El número de celular no es válido para Argentina.',
+            'mobile.unique' => 'Este número de celular ya está registrado.',
+            'email.unique' => 'Este correo electrónico ya está registrado.',
+            'password.min' => 'La contraseña debe tener al menos :min caracteres.',
         ]);
     }
 
@@ -66,6 +79,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'surname' => $data['surname'],
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),

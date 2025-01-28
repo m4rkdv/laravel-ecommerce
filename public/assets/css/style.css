@@ -9666,7 +9666,7 @@ img {
     letter-spacing: 0.18em; }
 
 .form-control_gray {
-  border-color: #000000; }
+  border-color: #222; }
 
 .form-control-plaintext {
   display: block;
@@ -15323,6 +15323,7 @@ button.js-add-wishlist.active .flaticon.flaticon-heart, a.add-to-wishlist.active
   max-height: 100vh; }
 
 .login-register {
+  background-color: #303030;
   width: 40.625rem;
   max-width: 100%;
   padding: 0 4.6875rem; }
