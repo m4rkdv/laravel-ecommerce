@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+<style>
+  .pt-90{
+      background-color: black;
+  }
+</style>
 <main class="pt-90">
     <div class="mb-4 pb-4"></div>
     <section class="login-register container">
@@ -26,7 +30,7 @@
                     </span>
                 @enderror
               </div>
-
+              <div class="pb-3"></div>
               <div class="form-floating mb-3">
                 <input id="surname" type="text" class="form-control form-control_gray @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname">
                 <label for="surname">Apellido</label>

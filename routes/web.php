@@ -1,13 +1,18 @@
 <?php
 
+use App\Models\Transaction;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CartController;
+use Surfsidemedia\Shoppingcart\Facades\Cart;
+use MercadoPago\Client\Payment\PaymentClient;
 
 Auth::routes();
 
@@ -28,6 +33,52 @@ Route::delete('/carrito/quitar-coupon',[CartController::class,'remove_coupon'])-
 Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
 Route::post('/realizar-pedido',[CartController::class,'place_an_order'])->name('cart.place.order');
 Route::get('/pedido-confirmado',[CartController::class,'order_confirmation'])->name('cart.confirmation');
+Route::get('/checkout/success', function (Request $request) {
+    $orderId = $request->input('external_reference'); // ID del pedido
+    $status = $request->input('status');             // Estado del pago (enviado en el back_url)
+    $paymentId = $request->input('payment_id');      // ID del pago de Mercado Pago
+
+    if (!$paymentId || !$orderId) {
+        return redirect()->route('cart.index')->with('error', 'Faltan datos para procesar el pago.');
+    }
+
+    // Verificar el estado del pago en la API de Mercado Pago
+    if (!$status) {
+        $paymentClient = new PaymentClient();
+        try {
+            $payment = $paymentClient->get($paymentId); // Consultar detalles del pago en la API
+            $status = $payment->status; // Obtener el estado del pago desde la API
+        } catch (\Exception $e) {
+            return redirect()->route('cart.index')->with('error', 'Error al verificar el estado del pago.');
+        }
+    }
+
+     // Actualizar el estado de la transacción
+     $transaction = Transaction::where('order_id', $orderId)->first();
+     if ($transaction) {
+         $transaction->status = match ($status) {
+             'approved' => 'approved',
+             'rejected' => 'declined',
+             'refunded' => 'refunded',
+             default => 'pending',
+         };
+         $transaction->save();
+     }
+
+        // Limpieza del carrito y datos de sesión
+        Cart::instance('cart')->destroy();
+        Session::forget('checkout');
+        Session::forget('coupon');
+        Session::forget('discounts');
+        Session::put('order_id', $orderId);
+
+        return redirect()->route('cart.confirmation');
+})->name('mercadopago.success');
+
+Route::get('/checkout/failed', function () {
+    return view('mercadopago.failed'); // Renderiza la vista payment_failed.blade.php
+})->name('mercadopago.failed');
+
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');

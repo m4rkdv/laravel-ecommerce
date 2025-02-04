@@ -9,6 +9,7 @@ use App\Models\Address;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Services\MercadoPagoService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Surfsidemedia\Shoppingcart\Facades\Cart;
@@ -124,7 +125,7 @@ class CartController extends Controller
         return view('checkout',compact('address'));
     }
 
-    public function place_an_order(Request $request)
+    public function place_an_order(Request $request, MercadoPagoService $mercadoPagoService)
     {
         $user_id = Auth::user()->id;
         $address = Address::where('user_id',$user_id)->where('is_default',true)->first();
@@ -208,9 +209,16 @@ class CartController extends Controller
         $transaction = new Transaction();
         $transaction->user_id = $user_id;
         $transaction->order_id = $order->id;
-        $transaction->mode = $request->mode;  // Modo de pago (por ejemplo, "efectivo", "tarjeta")
+        $transaction->mode = $request->mode;  // Modo de pago (por ejemplo, "MercadoPago", "Transferencia")
         $transaction->status = 'pending';    // Estado inicial de la transacción
         $transaction->save();
+
+        if ($request->mode === 'mercadopago') {
+            return $mercadoPagoService->crearPreferencia([
+                'order_id' => $order->id, // Pasar el ID del pedido para referencia externa
+                'items' => Cart::instance('cart')->content(),
+            ]);
+        }
 
          // Limpieza: Vaciar el carrito y datos de sesión relacionados
         Cart::instance('cart')->destroy();
@@ -218,7 +226,7 @@ class CartController extends Controller
         Session::forget('coupon');
         Session::forget('discounts');
         Session::put('order_id',$order->id);
-
+        
         // Redirigir al usuario a una página de confirmación
         return redirect()->route('cart.confirmation');
     }
