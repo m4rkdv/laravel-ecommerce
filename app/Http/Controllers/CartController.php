@@ -174,6 +174,11 @@ class CartController extends Controller
 
         $this->setAmountForCheckout();
 
+        // Verificar si la sesión 'checkout' existe
+        if (!Session::has('checkout')) {
+            return redirect()->route('cart.index')->with('error', 'La sesión de compra ha expirado. Por favor, intenta nuevamente.');
+        }
+        
          // Crear un nuevo pedido
         $order = new Order();
         $order->user_id = $user_id;

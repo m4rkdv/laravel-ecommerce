@@ -203,35 +203,38 @@
                     </table>
                 @endif
               </div>
-              <div class="checkout__payment-methods">
-
-                  <div class="form-check">
-                    <input class="form-check-input form-check-input_fill" type="radio" name="mode"
-                      id="mode1" value="mercadopago" checked>
-                    <label class="form-check-label" for="mode1">
-                      Mercado Pago
-                      <p class="option-detail">
-                        Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                        aliquam varius ipsum.
-                      </p>
+              <div class="checkout__payment-methods p-4" style="background-color: #222; border-radius: 10px; padding: 20px; color: #ffffff;">
+                <h3 class="mb-4" style="font-weight: bold; color: #ffffff; text-align: center;">Método de Pago</h3>
+            
+                <div class="form-check mb-4 d-flex align-items-center" style="padding: 10px; background-color: #333; border-radius: 8px; border: 1px solid #444;">
+                    <input class="form-check-input me-3" type="radio" name="mode" id="mode1" value="mercadopago" checked style="width: 20px; height: 20px;">
+                    <label class="form-check-label d-flex align-items-center" for="mode1" style="font-size: 1.1rem; color: #ffffff;">
+                      <img src="{{ asset('images/mp/MP_RGB_HANDSHAKE_pluma-relleno-blanco_hori-izq.svg') }}" 
+                      alt="Mercado Pago" 
+                      style="width: 120px; height: auto; margin-right: 15px;">
+                        Mercado Pago
                     </label>
-                  </div>
-
-                <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="mode"
-                    id="mode2" value="card">
-                  <label class="form-check-label" for="mode2">
-                    Transferencia Bancaria Directa
-                    <p class="option-detail">
-                        Realizá el pago directamente en nuestra cuenta bancaria. Usá tu ID de Pedido como referencia de pago. El pedido no será enviado hasta que los fondos se acrediten en nuestra cuenta.
-                    </p>
-                  </label>
                 </div>
-
-                <div class="policy-text">
-                    Tus datos personales serán utilizados para procesar tu pedido, mejorar tu experiencia en esta tienda, y para otros propósitos descritos en nuestra <a href="terms.html" target="_blank">política de privacidad</a>.
+                <p class="option-detail text-muted" style="font-size: 0.9rem; margin-left: 40px; color: #cccccc;">
+                    Paga de forma segura utilizando tu cuenta de Mercado Pago. Aceptamos tarjetas de crédito y otros medios de pago.
+                </p>
+            
+                <div class="form-check mb-3 d-flex align-items-center" style="padding: 10px; background-color: #333; border-radius: 8px; border: 1px solid #444;">
+                    <input class="form-check-input me-3" type="radio" name="mode" id="mode2" value="card" style="width: 20px; height: 20px;">
+                    <label class="form-check-label d-flex align-items-center" for="mode2" style="font-size: 1.1rem; color: #ffffff;">
+                      <img width="45" height="45" src="https://img.icons8.com/ios/50/FFFFFF/credit-card-front.png" alt="credit-card-front" style="margin-right: 10px;">
+                        Transferencia Bancaria Directa
+                    </label>
                 </div>
-              </div>
+                <p class="option-detail text-muted" style="font-size: 0.9rem; margin-left: 40px; color: #cccccc;">
+                    Realizá el pago directamente en nuestra cuenta bancaria. Usá tu ID de Pedido como referencia de pago. El pedido no será enviado hasta que los fondos se acrediten en nuestra cuenta.
+                </p>
+            
+                <div class="policy-text mt-4" style="font-size: 0.9rem; color: #cccccc;">
+                    <strong>Nota:</strong> Tus datos personales serán utilizados para procesar tu pedido, mejorar tu experiencia en esta tienda y otros propósitos descritos en nuestra <a href="terms.html" target="_blank" style="color: #ffcc00;">política de privacidad</a>.
+                </div>
+            </div>
+            
               <button class="btn btn-primary btn-checkout">CONFIRMAR PEDIDO</button>
             </div>
           </div>
