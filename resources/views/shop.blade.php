@@ -14,6 +14,57 @@
         margin-right: 0.75rem;
         }
 
+        .add-to-cart {
+            display: block !important;
+            
+            opacity: 1 !important;
+        }
+
+        @media (max-width: 768px) {
+            .buttons-container {
+                display: flex !important;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                opacity: 1 !important;
+                visibility: visible !important;
+                position: relative;
+                bottom: 0 !important; 
+            }
+
+            .anim_appear-fade,
+            .anim_appear-bottom,
+            .anim_appear-right {
+                opacity: 1 !important;
+                visibility: visible !important;
+                transition: none !important; 
+            }
+
+            .product-card {
+                padding-bottom: 80px; 
+            }
+
+            .buttons-container button, .buttons-container a {
+                width: 90%;
+                padding: 10px;
+                font-size: 1rem;
+            }
+        }
+
+        .product-moving {
+            position: fixed;
+            width: 100px; 
+            height: 100px;
+            object-fit: contain;
+            z-index: 9999;
+            transition: transform 0.6 ease, opacity 0.8s ease; 
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            background-position: center;
+            background-repeat: no-repeat;
+            object-fit: cover;
+        }
+
     </style>
     <main class="pt-90">
         <section class="shop-main container d-flex pt-4 pt-xl-5">
@@ -183,61 +234,64 @@
         <div class="products-grid row row-cols-2 row-cols-md-3" id="products-grid">
             @foreach ($products as $product)
                 <div class="product-card-wrapper">
-                <div class="product-card mb-3 mb-md-4 mb-xxl-5">
-                    <div class="pc__img-wrapper">
-                    <div class="swiper-container background-img js-swiper-slider" data-settings='{"resizeObserver": true}'>
-                        <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <a href="{{ route('shop.products.details',['product_slug'=>$product->slug]) }}"><img loading="lazy" src="{{ asset('/uploads/products') }}/{{$product->image}}" width="330"
-                                height="400" alt="{{ $product->name }}" class="pc__img"></a>
+                    <div class="product-card mb-3 mb-md-4 mb-xxl-5">
+                        <div class="pc__img-wrapper">
+                        <div class="swiper-container background-img js-swiper-slider" data-settings='{"resizeObserver": true}'>
+                            <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="{{ route('shop.products.details',['product_slug'=>$product->slug]) }}"><img loading="lazy" src="{{ asset('/uploads/products') }}/{{$product->image}}" width="330"
+                                    height="400" alt="{{ $product->name }}" class="pc__img"></a>
+                            </div>
+                            <div class="swiper-slide">
+                                @foreach (explode(",",$product->images) as $gImg)
+                                <a href="{{ route('shop.products.details',['product_slug'=>$product->slug]) }}"><img loading="lazy" src="{{ asset('uploads/products') }}/{{ $gImg }}"
+                                    width="330" height="400" alt="{{ $product->name }}" class="pc__img"></a>
+                                @endforeach
+                            </div>
+                            </div>
+                            <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <use href="#icon_prev_sm" />
+                            </svg></span>
+                            <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <use href="#icon_next_sm" />
+                            </svg></span>
+                            </div>
+                            <div class="buttons-container">
+                                @if (Cart::instance('cart')->content()->where('id',$product->id)->count()>0)
+                                    <a href="{{ route('cart.index') }}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-info mb-3">Comprar</a>
+                                @else
+                                    <form name="addtocart-form" method="post" action="{{ route('cart.add') }}">
+                                        @csrf
+                                    <input type="hidden" name="id" value="{{ $product->id }}" />
+                                    <input type="hidden" name="quantity" value="1" />
+                                    <input type="hidden" name="name" value="{{ $product->name }}" />
+                                    <input type="hidden" name="price" value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}" />    
+                                    <button
+                                        type="submit"
+                                        class="pc__atc btn-info anim_appear-bottom btn position-absolute border-0 fw-medium add-to-cart"
+                                        data-aside="cartDrawer" title="Add To Cart">Agregar
+                                    </button>
+                                    </form>    
+                                @endif
+                            </div>    
                         </div>
-                        <div class="swiper-slide">
-                            @foreach (explode(",",$product->images) as $gImg)
-                            <a href="{{ route('shop.products.details',['product_slug'=>$product->slug]) }}"><img loading="lazy" src="{{ asset('uploads/products') }}/{{ $gImg }}"
-                                width="330" height="400" alt="{{ $product->name }}" class="pc__img"></a>
-                            @endforeach
-                        </div>
-                        </div>
-                        <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_prev_sm" />
-                        </svg></span>
-                        <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_next_sm" />
-                        </svg></span>
-                    </div>
-                    @if (Cart::instance('cart')->content()->where('id',$product->id)->count()>0)
-                        <a href="{{ route('cart.index') }}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-info mb-3">Ir al Carrito</a>
-                    @else
-                        <form name="addtocart-form" method="post" action="{{ route('cart.add') }}">
-                            @csrf
-                        <input type="hidden" name="id" value="{{ $product->id }}" />
-                        <input type="hidden" name="quantity" value="1" />
-                        <input type="hidden" name="name" value="{{ $product->name }}" />
-                        <input type="hidden" name="price" value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}" />    
-                        <button
-                            type="submit"
-                            class="pc__atc btn-info anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium"
-                            data-aside="cartDrawer" title="Add To Cart">Agregar al Carrito</button>
-                        </form>    
-                    @endif    
-                    </div>
 
-                    <div class="pc__info position-relative">
-                    <p class="pc__category">{{ $product->category->name }}</p>
-                    <h6 class="pc__title"><a href="{{ route('shop.products.details',['product_slug'=>$product->slug]) }}">{{ $product->name }}</a></h6>
-                    <div class="product-card__price d-flex">
-                        <span class="money price">
-                            @if ($product->sale_price)
-                                <s>${{ $product->regular_price }}</s> ${{ $product->sale_price }}
-                            @else
-                                ${{ $product->regular_price }}                                    
-                            @endif
-                        </span>
+                        <div class="pc__info position-relative">
+                        <p class="pc__category">{{ $product->category->name }}</p>
+                        <h6 class="pc__title"><a href="{{ route('shop.products.details',['product_slug'=>$product->slug]) }}">{{ $product->name }}</a></h6>
+                        <div class="product-card__price d-flex">
+                            <span class="money price">
+                                @if ($product->sale_price)
+                                    <s>${{ $product->regular_price }}</s> ${{ $product->sale_price }}
+                                @else
+                                    ${{ $product->regular_price }}                                    
+                                @endif
+                            </span>
+                        </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
                 </div>
             @endforeach
         </div>
@@ -261,6 +315,59 @@
 </form>      
 @endsection
 @push('scripts')
+    <script>
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    console.log('Envío del formulario');
+
+                    
+                    const productImage = this.closest('.product-card').querySelector('.pc__img');
+                    const productSrc = productImage.getAttribute('src'); 
+
+                    const productRect = productImage.getBoundingClientRect();
+
+                    
+                    const movingProduct = document.createElement('div');
+                    movingProduct.classList.add('product-moving');
+                    movingProduct.style.left = `${productRect.left}px`;
+                    movingProduct.style.top = `${productRect.top}px`;
+                    movingProduct.style.backgroundImage = `url(${productSrc})`;
+                    movingProduct.style.backgroundSize = 'cover';
+                    movingProduct.style.width = '40px';
+                    movingProduct.style.height = '40px';
+                    movingProduct.style.position = 'fixed'; 
+
+                    document.body.appendChild(movingProduct);
+
+                    
+                    movingProduct.getBoundingClientRect();  
+
+                    
+                    let targetX, targetY;
+                    if (window.innerWidth <= 768) {
+                        targetX = window.innerWidth - 50;  // Valores específicos para mobile
+                        targetY = 10;
+                    } else {
+                        targetX = window.innerWidth - 165;  // Valores para desktop
+                        targetY = 65;
+                    }
+
+                    
+                    movingProduct.style.transition = 'transform 0.8s ease-in-out';
+                    movingProduct.style.transform = `translate(${targetX - productRect.left}px, ${targetY - productRect.top}px)`;
+
+                    
+                    setTimeout(() => {
+                        movingProduct.remove();
+
+                        // Actualizar el contador del carrito
+                        const cartCount = document.querySelector('#cart-count');
+                        cartCount.textContent = parseInt(cartCount.textContent) + 1;
+                    }, 800);  // Tiempo igual al de la transición
+                });
+            });
+    </script>
+
     <script>
         $(function()
         {

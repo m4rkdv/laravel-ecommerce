@@ -7,6 +7,17 @@
     .text-danger{
         color: crimson !important;
     }
+    .btn-outline-secondary {
+        background-color: #444;
+        color: white;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        cursor: pointer;    }
+
+    .btn-outline-secondary:hover {
+        background-color: #555;
+        color: #ffcc00;
+    }
 </style>
 <main class="pt-90">
     <div class="mb-4 pb-4"></div>
@@ -70,19 +81,21 @@
                             <span class="shopping-cart__product-price">${{ $item->price }}</span>
                             </td>
                             <td>
-                            <div class="qty-control position-relative">
-                                <input type="number" name="quantity" value="{{ $item->qty }}" min="1" class="qty-control__number text-center">
-                                <form method="POST" action="{{ route('cart.qty.decrease',['rowId'=>$item->rowId]) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="qty-control__reduce">-</div>
-                                </form>    
-                                <form method="POST" action="{{ route('cart.qty.increase',['rowId'=>$item->rowId]) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="qty-control__increase">+</div>
-                                </form>
-                            </div>
+                                <div class="d-flex align-items-center">
+                                    <form method="POST" action="{{ route('cart.qty.decrease', ['rowId' => $item->rowId]) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-outline-secondary" style="width: 35px; height: 35px;">-</button>
+                                    </form>
+                            
+                                    <span class="mx-3">{{ $item->qty }}</span>
+                            
+                                    <form method="POST" action="{{ route('cart.qty.increase', ['rowId' => $item->rowId]) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-outline-secondary" style="width: 35px; height: 35px;">+</button>
+                                    </form>
+                                </div>
                             </td>
                             <td>
                             <span class="shopping-cart__subtotal">${{ $item->subTotal() }}</span>

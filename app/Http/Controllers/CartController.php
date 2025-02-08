@@ -178,7 +178,7 @@ class CartController extends Controller
         if (!Session::has('checkout')) {
             return redirect()->route('cart.index')->with('error', 'La sesión de compra ha expirado. Por favor, intenta nuevamente.');
         }
-        
+
          // Crear un nuevo pedido
         $order = new Order();
         $order->user_id = $user_id;
@@ -263,12 +263,20 @@ class CartController extends Controller
 
     public function order_confirmation()
     {
-        if(Session::has('order_id'))
-        {
-            $order = Order::find(Session::get('order_id'));
-            return view('order-confirmation',compact('order'));
+        // Verificar si la sesión 'order_id' existe
+        if (!Session::has('order_id')) {
+            return redirect()->route('cart.index')->with('error', 'No se encontró un pedido activo.');
         }
-        return redirect()->route('cart.index');
+
+        // Obtener el pedido
+        $order = Order::find(Session::get('order_id'));
+
+        // Verificar si el pedido existe
+        if (!$order) {
+            return redirect()->route('cart.index')->with('error', 'El pedido no existe.');
+        }
+
+        return view('order-confirmation', compact('order'));
     }
 
 }
