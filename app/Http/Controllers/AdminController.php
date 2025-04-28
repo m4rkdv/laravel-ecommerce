@@ -19,7 +19,8 @@ use Intervention\Image\Laravel\Facades\Image;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin.index');
+        $orders = Order::orderBy('created_at','DESC')->get()->take(10); 
+        return view('admin.index',compact('orders'));
     }
 
     public function brands(){
