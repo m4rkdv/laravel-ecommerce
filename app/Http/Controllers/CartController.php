@@ -129,7 +129,6 @@ class CartController extends Controller
     {
         $user_id = Auth::user()->id;
         $address = Address::where('user_id',$user_id)->where('is_default',true)->first();
-
         if(!$address)
         {
             $request->validate([
