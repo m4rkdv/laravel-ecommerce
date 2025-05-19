@@ -325,7 +325,7 @@
               <a href="about.html" class="navigation__link">Sobre Nosotros</a>
             </li>
             <li class="navigation__item">
-              <a href="contact.html" class="navigation__link">Contacto</a>
+              <a href="{{ route('home.contact') }}" class="navigation__link">Contacto</a>
             </li>
           </ul>
         </div>
@@ -416,7 +416,7 @@
               <a href="about.html" class="navigation__link">Sobre Nosotros</a>
             </li>
             <li class="navigation__item">
-              <a href="contact.html" class="navigation__link">Contacto</a>
+              <a href="{{ route('home.contact') }}" class="navigation__link">Contacto</a>
             </li>
           </ul>
         </nav>
@@ -574,7 +574,7 @@
           <h6 class="sub-menu__title text-uppercase">Empresa</h6>
           <ul class="sub-menu__list list-unstyled">
             <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">Sobre Nosotros</a></li>
-            <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contacto</a></li>
+            <li class="sub-menu__item"><a href="{{ route('home.contact') }}" class="menu-link menu-link_us-s">Contacto</a></li>
           </ul>
         </div>
 
