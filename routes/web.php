@@ -79,6 +79,7 @@ Route::get('/checkout/failed', function () {
     return view('mercadopago.failed'); // Renderiza la vista payment_failed.blade.php
 })->name('mercadopago.failed');
 Route::get('/contacto',[HomeController::class,'contact'])->name('home.contact');
+Route::post('/contacto/store',[HomeController::class,'contact_store'])->name('home.contact.store');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
