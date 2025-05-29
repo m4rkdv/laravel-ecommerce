@@ -38,7 +38,7 @@ class HomeController extends Controller
         $contact->name = $request->name;
         $contact->email = $request->email;
         $contact->phone = $request->phone;
-        $contact->comment = $request->comment;
+        $contact->coment = $request->comment;
         $contact->save();
         return redirect()->back()->with('success','Su mensaje ha sido enviado!');
     }

@@ -8,6 +8,7 @@ use App\Models\Slide;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Contac;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
@@ -662,5 +663,18 @@ class AdminController extends Controller
         }
         $slide->delete();
         return redirect()->route('admin.slides')->with('status','El Slide ha sido borrado exitosamente.');
+    }
+
+    public function contacts()
+    {
+        $contacts = Contac::orderBy('created_at','DESC')->paginate(10);
+        return view('admin.contacts',compact('contacts'));
+    }
+
+    public function contact_remove($id)
+    {
+        $contact = Contac::find($id);
+        $contact->delete();
+        return redirect()->route('admin.contacts')->with('status','El mensaje se ha borrado con éxito.');
     }
 }

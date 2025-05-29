@@ -130,4 +130,6 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::put('/admin/slider/update',[AdminController::class,'slide_update'])->name('admin.slides.update');
     Route::delete('/admin/slider/{id}/delete',[AdminController::class,'slide_delete'])->name('admin.slides.delete');
 
+    Route::get('/admin/contact',[AdminController::class,'contacts'])->name('admin.contacts');
+    Route::delete('/admin/contact/{id}/delete',[AdminController::class,'contact_remove'])->name('admin.contacts.delete');
 });
