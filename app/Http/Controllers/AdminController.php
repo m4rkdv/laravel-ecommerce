@@ -677,4 +677,11 @@ class AdminController extends Controller
         $contact->delete();
         return redirect()->route('admin.contacts')->with('status','El mensaje se ha borrado con éxito.');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $results = Product::where('name','LIKE',"%{$query}%")->get()->take(8);
+        return response()->json($results);
+    }
 }
