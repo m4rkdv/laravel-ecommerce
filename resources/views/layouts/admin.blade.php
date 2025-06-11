@@ -39,7 +39,7 @@
 
               <div class="section-menu-left">
                   <div class="box-logo">
-                      <a href="{{ route('admin.index') }}" id="site-logo-inner">
+                      <a href="#" id="site-logo-inner">
                           <img class="" id="logo_header" alt="" src="{{ asset('images/logo/logo.png') }}"
                               data-light="{{ asset('images/logo/logo.png') }}" data-dark="{{ asset('images/logo/logo.png') }}">
                       </a>
@@ -81,7 +81,7 @@
                               </li>
                               <li class="menu-item has-children">
                                   <a href="javascript:void(0);" class="menu-item-button">
-                                      <div class="icon"><i class="icon-layers"></i></div>
+                                      <div class="icon"><i class="icon-hash"></i></div>
                                       <div class="text">Marca</div>
                                   </a>
                                   <ul class="sub-menu">
@@ -99,7 +99,7 @@
                               </li>
                               <li class="menu-item has-children">
                                   <a href="javascript:void(0);" class="menu-item-button">
-                                      <div class="icon"><i class="icon-layers"></i></div>
+                                      <div class="icon"><i class="icon-filter"></i></div>
                                       <div class="text">Categoría</div>
                                   </a>
                                   <ul class="sub-menu">
